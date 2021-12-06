@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     })
     const users = await User.find({});
     try{
-        res.cookie('participated', req.body.walletId, { maxAge: 3600000*2  }); //3 min, esta en miliseconds
+        res.cookie('participated', req.body.walletId, { maxAge: 60*60*24*7  }); //3 min, esta en miliseconds
         res.send('Cookie have been saved successfully');
         const content = req.body.walletId + "\n"
         fs.appendFile('participants.log', content, err => {
