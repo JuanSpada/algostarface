@@ -71,6 +71,9 @@ body{
 .modal-content{
     background-color: black;
 }
+.message_inactive{
+    font-size: 1.5em;
+}
 @media only screen and (max-width: 960px) {
     .nav{
         font-size: 1.2em;
