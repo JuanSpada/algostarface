@@ -79,6 +79,11 @@ body{
     width: 40%;
     padding-top: 48px;
 }
+.message-section{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 @media only screen and (max-width: 960px) {
     .nav{
         font-size: 1.2em;

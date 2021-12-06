@@ -34,6 +34,9 @@
 <% if (participated == 1) { %>
     <section class="message-section" style="">
         <h3 class="message">Congratulations! You are now participating in the shuffle with <span class="participantsnum"> <%= amountParticipated %>  </span> total participants. Good Luck!</h3>
+          <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
+            View Disclaimer
+          </button>
     </section>
     <% } else { %>
     <section class="participate-section" style="">
