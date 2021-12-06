@@ -106,6 +106,9 @@ body{
     .participantsnum{
         font-size: 1em.3;
     }
+    .backtohome{
+        width: 60%;
+    }
 }
 @media only screen and (max-width: 560px) {
     .nav{
