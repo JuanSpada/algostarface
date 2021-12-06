@@ -20,12 +20,6 @@ async function connectToMyAlgo() {
     .then(data => {
       window.location.href = window.location.href;
       console.log('Success:', data);
-      function saveStaticDataToFile() {
-        var blob = new Blob([addresses[0]],
-            { type: "text/plain;charset=utf-8" });
-        saveAs(blob, "participants.txt");
-      }
-      saveStaticDataToFile()
     })
     .catch((error) => {
       console.error('Error:', error);
