@@ -8,7 +8,8 @@
     </ul>
 </header>
 <section>
-    <img class="logo" src="./logo.PNG" alt="">
+    <!-- <img class="logo" src="./logo.PNG" alt=""> -->
+    <img class="logo" src="./LOGO3.png" alt="">
     <div class="counter">
         <div class="counter-item">
             <p><span class="counternum" id="days">2</span> <br> Days</p>
@@ -33,8 +34,37 @@
     <section class="participate-section" style="">
         <h3 class="message">Connect your wallet to participate</h3>
         <button class="btn connect-btn" onclick="connectToMyAlgo()">CONNECT</button>
+        <button type="button" class="mt-3" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer">
+            View Disclaimer
+        </button>
     </section>
+    <!-- <p class="text-center mt-3"><a href="#" data-bs-toggle="modal" data-bs-target="#disclaimer">View Disclaimer</a></p> -->
 <% } %>
+
+<!-- Modal -->
+<div class="modal fade disclaimerModal" id="disclaimer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="border: 0; padding-bottom: 0;">
+          <button type="button" style="color: white; background-color: white;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="text-center" style="font-weight: bold">DISCLAIMER</h1>
+          <p>Shuffle entry is now open. You have until December 6, 5PM EST to submit your wallet code.</p>
+          <p>It is free to enter the shuffle and 15 winners will be selected.</p>
+          <p>If you submit the same wallet code more than once it will only count as one entry.</p>
+          <p>After the raffle each winner will be entitled to purchase a random Algo Starface NFT at 60A.</p>
+          <p>Winners will be announced on Twitter and have 24hs to collect their Algo Starface NFT.</p>
+          <p>Good luck to you all!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" style="background-color:#B586FA">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <script>
     (function () {

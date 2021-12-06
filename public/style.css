@@ -5,6 +5,7 @@ body{
 }
 .active{
     font-weight: bold;
+    color: #B586FA !important;
 }
 .nav{
     margin-top: 2em;
@@ -62,9 +63,14 @@ body{
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    align-content: center;
 }
-
+.disclaimerModal{
+    /* background-color: black; */
+    color: white;
+}
+.modal-content{
+    background-color: black;
+}
 @media only screen and (max-width: 960px) {
     .nav{
         font-size: 1.2em;

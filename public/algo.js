@@ -27,6 +27,7 @@ async function connectToMyAlgo() {
     .then(response => response)
     .then(data => {
       window.location.href = window.location.href;
+      location.reload();
       console.log('Success:', data);
     })
     .catch((error) => {

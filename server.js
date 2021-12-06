@@ -8,7 +8,7 @@ app.use(express.json());
 const {check, validationResult} = require('express-validator') 
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/algostarface', {
+mongoose.connect('mongodb+srv://algostarface:Parcero2019@cluster0.stqev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     autoIndex: true, //make this also true
