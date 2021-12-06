@@ -33,5 +33,6 @@ if (distance < 0) {
     document.getElementById("hours").innerText = '0'
     document.getElementById("minutes").innerText = '0'
     document.getElementById("seconds").innerText = '0'
+    document.querySelector('.message-section').style.display = 'none'
 }
 }, 1000);
