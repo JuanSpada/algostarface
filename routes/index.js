@@ -8,7 +8,7 @@ const fs = require('fs')
 router.use(cookieParser());
 
 router.get('/', async (req, res) => {
-    res.clearCookie("participated");
+    // res.clearCookie("participated");
     const countUsers = await User.countDocuments();
     if ('participated' in req.cookies){
         res.render('index', {participated: 1, amountParticipated: countUsers})
