@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema({
     participo: {
         type: Boolean,
     },
+    winner: {
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now
