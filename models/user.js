@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
     },
     winner: {
-        type: String,
+        type: Boolean,
     },
     createdAt: {
         type: Date,

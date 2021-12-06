@@ -19,6 +19,7 @@ router.post('/', async (req, res) => {
     let user = new User({
         walletId: req.body.walletId,
         participo: 1,
+        winner: false,
         createdAt: Date.now()
     })
     const users = await User.find({});
