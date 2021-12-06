@@ -1,0 +1,83 @@
+<header class="d-flex justify-content-center">
+    <ul class="nav">
+        <li class="nav-item"><a href="#" class="">HOME</a></li>
+        <li class="nav-item"><a href="#" class="">ROADMAP</a></li>
+        <li class="nav-item"><a href="#" class="">TRAITS</a></li>
+        <li class="nav-item"><a href="#" class="active">SHUFFLE</a></li>
+        <li class="nav-item"><a href="#" class="">CONTACT US</a></li>
+    </ul>
+</header>
+<section>
+    <img class="logo" src="./logo.PNG" alt="">
+    <div class="counter">
+        <div class="counter-item">
+            <p><span class="counternum" id="days">2</span> <br> Days</p>
+        </div>
+        <div class="counter-item">
+            <p><span class="counternum" id="hours">4</span> <br> Hours</p>
+        </div>
+        <div class="counter-item">
+            <p><span class="counternum" id="minutes">34</span> <br> Minutes</p>
+        </div>
+        <div class="counter-item">
+            <p><span class="counternum" id="seconds">58</span> <br> Seconds</p>
+        </div>
+    </div>
+</section>
+<!-- <%= participated %>  -->
+<% if (participated == 1) { %>
+    <section class="message-section" style="">
+        <h3 class="message">Congratulations! You are now participating in the shuffle with <span class="participantsnum"> <%= amountParticipated %>  </span> total participants. Good Luck</h3>
+    </section>
+    <% } else { %>
+    <section class="participate-section" style="">
+        <h3 class="message">Connect your wallet to participate</h3>
+        <button class="btn connect-btn" onclick="connectToMyAlgo()">CONNECT</button>
+    </section>
+<% } %>
+
+<script>
+    (function () {
+  const second = 1000,
+        minute = second * 60,
+        hour = minute * 60,
+        day = hour * 24;
+
+  //I'm adding this section so I don't have to keep updating this pen every year :-)
+  //remove this if you don't need it
+  let today = new Date(),
+      dd = String(today.getDate()).padStart(2, "0"),
+      mm = String(today.getMonth() + 1).padStart(2, "0"),
+      yyyy = today.getFullYear(),
+      nextYear = yyyy + 1,
+      dayMonth = "12/07/",
+      birthday = dayMonth + yyyy;
+  
+  today = mm + "/" + dd + "/" + yyyy;
+  if (today > birthday) {
+    birthday = dayMonth + nextYear;
+  }
+  //end
+  
+  const countDown = new Date(birthday).getTime(),
+      x = setInterval(function() {    
+
+        const now = new Date().getTime(),
+              distance = countDown - now;
+
+        document.getElementById("days").innerText = Math.floor(distance / (day)),
+        document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+        document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+        document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+
+        //do something later when date is reached
+        if (distance < 0) {
+          document.getElementById("headline").innerText = "It's my birthday!";
+          document.getElementById("countdown").style.display = "none";
+          document.getElementById("content").style.display = "block";
+          clearInterval(x);
+        }
+        //seconds
+      }, 0)
+  }());
+</script>
