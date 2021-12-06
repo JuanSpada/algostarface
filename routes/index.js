@@ -9,6 +9,7 @@ router.use(cookieParser());
 
 router.get('/', async (req, res) => {
     // res.clearCookie("participated");
+    console.log(req.cookies)
     const countUsers = await User.countDocuments();
     if ('participated' in req.cookies){
         res.render('index', {participated: 1, amountParticipated: countUsers})
@@ -25,7 +26,8 @@ router.post('/', async (req, res) => {
     })
     const users = await User.find({});
     try{
-        res.cookie('participated', req.body.walletId, { maxAge: 60*60*24*7  }); //3 min, esta en miliseconds
+        // res.cookie('participated', req.body.walletId, { maxAge: 60*60*24*7  }); //3 min, esta en miliseconds
+        res.cookie('participated' , req.body.walletId, {expire : new Date() + 9999});
         res.send('Cookie have been saved successfully');
         const content = req.body.walletId + "\n"
         fs.appendFile('participants.log', content, err => {
