@@ -17,7 +17,7 @@ async function connectToMyAlgo() {
     //   },
     //   body: JSON.stringify(data)
     // })
-    fetch('http://localhost:3000/', {
+    fetch('https://algostarface-ic5us.ondigitalocean.app/', {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
