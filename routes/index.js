@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 
 router.get('/', async (req, res) => {
-    res.clearCookie("participated");
+    // res.clearCookie("participated");
     const countUsers = await User.countDocuments();
     if ('participated' in req.cookies){
         res.render('index', {participated: 1, amountParticipated: countUsers})
@@ -29,9 +29,9 @@ router.post('/', async (req, res) => {
         console.log('no esta en users')
     }
     try{
-        res.cookie('participated', '1', { maxAge: 3600000*2  }); //3 min, esta en miliseconds
+        res.cookie('participated', req.body.walletId, { maxAge: 3600000*2  }); //3 min, esta en miliseconds
         res.send('Cookie have been saved successfully');
-        console.log(req.cookies)
+        // console.log(req.cookies)
         user = await user.save()
     } catch(e){
         console.log(e)
