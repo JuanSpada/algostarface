@@ -9,15 +9,7 @@ async function connectToMyAlgo() {
       participo: 1,
       completed: false,
     };
-    // fetch("http://localhost:3000/", {
-    //   method: "post",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Accept": "application/json",
-    //   },
-    //   body: JSON.stringify(data)
-    // })
-    fetch('https://algostarface-ic5us.ondigitalocean.app/', {
+    fetch(window.location.href, {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
@@ -33,10 +25,6 @@ async function connectToMyAlgo() {
     .catch((error) => {
       console.error('Error:', error);
     });
-    // setTimeout(function () {
-    //   window.location.href = window.location.href;
-    // }, 5000);
-
 
   } catch (err) {
     console.error(err);
