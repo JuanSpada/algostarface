@@ -24,17 +24,17 @@ body{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 35em;
+    width: 25em;
 }
 .counter{
     display: flex;
     justify-content: center;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     font-size: 2em;
     text-align: center;
 }
 .counter-item{
-    padding: 1em;
+    padding: 1em 0.3em 0 1em;
 }
 .counternum{
     font-size: 2.5em;
