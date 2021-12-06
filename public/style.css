@@ -57,6 +57,7 @@ body{
     width: 10em;
     height: 3em;
     margin: 0 auto;
+    margin-bottom: 7px!important;
 }
 .participate-section{
     display: flex;
