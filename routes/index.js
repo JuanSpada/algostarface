@@ -8,7 +8,7 @@ const fs = require('fs')
 
 router.use(cookieParser());
 // VARIABLE DE SHOW WINNERS PARA ACTIVAR ESO
-const showWinners = false;
+const showWinners = true;
 
 router.get('/', async (req, res) => {
     // res.clearCookie("participated");
@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
         }
     }else{
         //si no participaste
-        res.render('index', {participated: 0, amountParticipated: countUsers, winner: false, showWinners, walletId: req.cookies.participated})
+        res.render('index', {participated: 3, amountParticipated: countUsers, winner: false, showWinners, walletId: req.cookies.participated})
     }
 })
 router.post('/', async (req, res) => {

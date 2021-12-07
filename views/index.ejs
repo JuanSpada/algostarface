@@ -66,18 +66,15 @@
         </button>
     </section>
     <% } else { %>
-      <% if (participated == 0) { %>
-          <h3 class="message mb-4">Unfortunately you have not been selected as a winner. <br> Better luck next time!</h3>
-        <% } else { %>
+      <% if (participated == 3) { %>
         <section class="participate-section" style="">
-          <h3 class="message message_active mb-4">Connect your wallet to participate</h3>
           <button class="btn connect-btn mb-4 button_connect" id="participateBtn" onclick="connectToMyAlgo()">CONNECT</button>
-          <h4 class="message message_inactive m-4" style="display: none;">Registration for our shuffle is now offline. <br> Connect your wallet to see if you won.</h4>
+          <h4 class="message message_inactive m-4" style="">Registration for our shuffle is now offline. <br> Connect your wallet to see if you won.</h4>
           <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
             View Disclaimer
           </button>
-      </section>
-        <!-- <p class="text-center mt-3"><a href="#" data-bs-toggle="modal" data-bs-target="#disclaimer">View Disclaimer</a></p> -->
+        </section>
+        <% } else { %>
     <% } %>
   <% } %>
 <% } %>
