@@ -7,15 +7,63 @@ const fs = require('fs')
 
 router.use(cookieParser());
 
+const showWinners = true;
+
 router.get('/', async (req, res) => {
     // res.clearCookie("participated");
     console.log(req.cookies)
     const countUsers = await User.countDocuments();
-    if ('participated' in req.cookies){
-        res.render('index', {participated: 1, amountParticipated: countUsers})
+
+    const query = {walletId: req.cookies.participated}
+    const user = await User.findOne(query);
+
+
+    //si participaste
+    if('participated' in req.cookies){
+        // si hay user quiere decir que participaste y ganaste
+        if(user){
+            if ('participated' in req.cookies && user['winner']){
+                console.log('participo y es winner')
+                res.render('index', {participated: 1, amountParticipated: countUsers, winner: true, showWinners})
+            }
+            else{
+                console.log('participo y no es winner')
+                res.render('index', {participated: 0, amountParticipated: countUsers, winner: false, showWinners})
+            }
+        }
     }else{
-        res.render('index', {participated: 0, amountParticipated: countUsers})
+        //si no participaste
+        res.render('index', {participated: 1, amountParticipated: countUsers, winner: false, showWinners})
     }
+    // Si ganaste, por ende muestra un user
+    // if(user){
+    //     console.log('encontro el user, por ende ganaste')
+    //     if ('participated' in req.cookies && user['winner']){
+    //         console.log('participo y es winner')
+    //         res.render('index', {participated: 1, amountParticipated: countUsers, winner: true, showWinners})
+    //     }else if(!('participated' in req.cookies) && user['winner']){
+    //         console.log('no participó y no es winner')
+    //         res.render('index', {participated: 1, amountParticipated: countUsers, winner: false, showWinners})
+    //     }
+    //     else{
+    //         console.log('participo y no es winner')
+    //         res.render('index', {participated: 0, amountParticipated: countUsers, winner: false, showWinners})
+    //     }
+    // }else{
+    //     // si no ganaste
+    //     console.log('NO encontro el user, por ende NO ganaste')
+    //     if ('participated' in req.cookies){
+    //         res.render('index', {participated: 1, amountParticipated: countUsers, winner: false, showWinners})
+    //     }else{
+    //         res.render('index', {participated: 0, amountParticipated: countUsers, winner: false, showWinners})
+    //     }
+    // }
+
+    // if ('participated' in req.cookies){
+    //     res.render('index', {participated: 1, amountParticipated: countUsers})
+    // }else{
+    //     res.render('index', {participated: 0, amountParticipated: countUsers})
+    // }
 })
 router.post('/', async (req, res) => {
     let user = new User({

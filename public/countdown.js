@@ -1,5 +1,5 @@
 // Set the date we're counting down to
-var countDownDate = new Date("12/07/2021 18:00:00").getTime();
+var countDownDate = new Date("12/07/2021 15:55:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -23,16 +23,32 @@ document.getElementById("minutes").innerText = minutes
 document.getElementById("seconds").innerText = seconds
 
 // If the count down is finished, write some text
+const showWinners = false
 if (distance < 0) {
-    document.querySelector('.button_connect').disabled = true;
-    document.querySelector('.message_active').style.display = 'none';
-    document.querySelector('.message_inactive').style.display = 'block';
-    document.getElementById('disclaimer_btn').style.display = 'none'
-    clearInterval(x);0
+    if(document.querySelector('.button_connect')){
+        // document.querySelector('.button_connect').disabled = true;
+    }
+    if(document.querySelector('.message_active')){
+        document.querySelector('.message_active').style.display = 'none';
+    }
+    if(document.querySelector('.message_inactive')){
+        document.querySelector('.message_inactive').style.display = 'block';
+    }
+    if(!showWinners){
+    }
+    if(document.getElementById('disclaimer_btn')){
+        document.getElementById('disclaimer_btn').style.display = 'none'
+    }
+    if(document.querySelector('.shuffle_close_section')){
+        document.querySelector('.shuffle_close_section').style.display = 'flex'
+    }
+    if(document.querySelector('.message-section')){
+        document.querySelector('.message-section').style.display = 'none'
+    }
+    clearInterval(x);
     document.getElementById("days").innerText = '0'
     document.getElementById("hours").innerText = '0'
     document.getElementById("minutes").innerText = '0'
     document.getElementById("seconds").innerText = '0'
-    document.querySelector('.message-section').style.display = 'none'
 }
 }, 1000);
