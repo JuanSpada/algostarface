@@ -20,7 +20,6 @@ router.get('/', async (req, res) => {
     const query = {walletId: req.cookies.participated}
     const user = await User.findOne(query);
 
-
     //si participaste
     if('participated' in req.cookies){
         // si hay user quiere decir que participaste y ganaste
