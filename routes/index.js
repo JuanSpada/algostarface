@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
         }
     }else{
         //si no participaste
-        res.render('index', {participated: 1, amountParticipated: countUsers, winner: false, showWinners, walletId: req.cookies.participated})
+        res.render('index', {participated: 0, amountParticipated: countUsers, winner: false, showWinners, walletId: req.cookies.participated})
     }
 })
 router.post('/', async (req, res) => {
