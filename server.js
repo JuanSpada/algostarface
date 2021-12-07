@@ -3,7 +3,8 @@ const app = express()
 const expressLayouts = require('express-ejs-layouts')
 
 const bodyParser = require('body-parser')
-
+const cors = require('cors');
+app.use(cors());
 app.use(express.json());
 const {check, validationResult} = require('express-validator') 
 
