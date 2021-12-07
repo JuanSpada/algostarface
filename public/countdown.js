@@ -26,7 +26,7 @@ document.getElementById("seconds").innerText = seconds
 const showWinners = false
 if (distance < 0) {
     if(document.querySelector('.button_connect')){
-        // document.querySelector('.button_connect').disabled = true;
+        document.querySelector('.button_connect').disabled = true;
     }
     if(document.querySelector('.message_active')){
         document.querySelector('.message_active').style.display = 'none';
