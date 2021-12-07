@@ -8,7 +8,7 @@ const fs = require('fs')
 
 router.use(cookieParser());
 // VARIABLE DE SHOW WINNERS PARA ACTIVAR ESO
-const showWinners = false;
+const showWinners = true
 
 router.get('/', async (req, res) => {
     // res.clearCookie("participated");
