@@ -10,7 +10,7 @@ router.use(cookieParser());
 const showWinners = true;
 
 router.get("/", async (req, res) => {
-  res.clearCookie("participated");
+  // res.clearCookie("participated2");
   res.setHeader("Access-Control-Allow-Headers", "*");
 
   console.log(req.cookies);
@@ -20,31 +20,40 @@ router.get("/", async (req, res) => {
   const user = await User.findOne(query);
 
   //si participaste
-  if ("participated" in req.cookies) {
+  if ("participated2" in req.cookies) {
+    console.log("participo");
+    res.render("index", {
+      participated: 1,
+      amountParticipated: countUsers,
+      winner: true,
+      showWinners,
+      walletId: req.cookies.participated,
+    });
     // si hay user quiere decir que participaste y ganaste
-    if (user) {
-      if ("participated" in req.cookies && user["winner"]) {
-        console.log("participo y es winner");
-        res.render("index", {
-          participated: 1,
-          amountParticipated: countUsers,
-          winner: true,
-          showWinners,
-          walletId: req.cookies.participated,
-        });
-      } else {
-        console.log("participo y no es winner");
-        res.render("index", {
-          participated: 0,
-          amountParticipated: countUsers,
-          winner: false,
-          showWinners,
-          walletId: req.cookies.participated,
-        });
-      }
-    }
+    // if (user) {
+    //   if ("participated2" in req.cookies && user["winner"]) {
+    //     console.log("participo y es winner");
+    //     res.render("index", {
+    //       participated: 1,
+    //       amountParticipated: countUsers,
+    //       winner: true,
+    //       showWinners,
+    //       walletId: req.cookies.participated,
+    //     });
+    //   } else {
+    //     console.log("participo y no es winner");
+    //     res.render("index", {
+    //       participated: 0,
+    //       amountParticipated: countUsers,
+    //       winner: false,
+    //       showWinners,
+    //       walletId: req.cookies.participated,
+    //     });
+    //   }
+    // }
   } else {
     //si no participaste
+    console.log("no participaste");
     res.render("index", {
       participated: 3,
       amountParticipated: countUsers,
@@ -64,7 +73,7 @@ router.post("/", async (req, res) => {
   const users = await User.find({});
   try {
     // res.cookie('participated', req.body.walletId, { maxAge: 60*60*24*7  }); //3 min, esta en miliseconds
-    res.cookie("participated", req.body.walletId, {
+    res.cookie("participated2", req.body.walletId, {
       expire: new Date() + 9999,
     });
     res.send("Cookie have been saved successfully");

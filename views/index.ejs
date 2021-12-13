@@ -24,7 +24,7 @@
 <div id="demo">
 
 </div>
-<% if (!showWinners) { %>
+<% if (showWinners) { %>
   <% if (participated == 1) { %>
       <section class="message-section" style="">
           <h3 class="message">Congratulations! You are now participating in the shuffle with <span class="participantsnum"> <%= amountParticipated %>  </span> total participants. Good Luck!</h3>
@@ -42,11 +42,11 @@
       <section class="participate-section" style="">
           <button class="btn connect-btn mb-4 button_connect" id="participateBtn" onclick="connectToMyAlgo()">CONNECT</button>
           <h4 class="message message_inactive m-4" style="display: none;">Registration for our shuffle is now closed. Winners will be announced shortly <br> Connect your wallet to see if you won.</h4>
+          <p class="text-center mt-3 mb-1">Registration is now open. Please connect your wallet to participate in our shuffle.</p>
           <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
             View Disclaimer
           </button>
       </section>
-      <p class="text-center mt-3"><a href="#" data-bs-toggle="modal" data-bs-target="#disclaimer">View Disclaimer</a></p>
   <% } %>
   <% } else { %>
     <% if (winner) { %>
@@ -67,8 +67,11 @@
     <% } else { %>
       <% if (participated == 3) { %>
         <section class="participate-section" style="">
-          <button disabled class="btn connect-btn mb-4 button_connect" id="participateBtn" onclick="connectToMyAlgo()">CONNECT</button>
+          <button class="btn connect-btn mb-4 button_connect" id="participateBtn" onclick="connectToMyAlgo()">CONNECT</button>
           <h4 class="message message_inactive m-4" style="">Next shuffle will be open for registration on Monday 13 at 4PM EST</h4>
+          <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
+            View Disclaimer
+          </button>
         </section>
         <% } else { %>
           <p class="text-center">Thanks for participating, good luck in the next one!</p>
@@ -85,7 +88,7 @@
       </div>
       <div class="modal-body">
         <h1 class="text-center" style="font-weight: bold">DISCLAIMER</h1>
-        <p>Shuffle entry is now open. You have until December 7, 4PM EST to submit your wallet code.</p>
+        <p>Shuffle entry is now open. You have until December 14, 4PM EST to submit your wallet code.</p>
         <p>It is free to enter the shuffle and 10 random winners will be selected. The winners will be announced shortly after registration closes.</p>
         <p>If you submit the same wallet code more than once it will only count as one entry.</p>
         <p>After the raffle each winner will be entitled to purchase a random Algo Starface NFT at 60A.</p>
