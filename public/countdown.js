@@ -21,29 +21,29 @@ var x = setInterval(function () {
   document.getElementById("minutes").innerText = minutes;
   document.getElementById("seconds").innerText = seconds;
 
-  // if (distance < 0) {
-  //   if (document.querySelector(".button_connect")) {
-  //     // document.querySelector('.button_connect').disabled = true;
-  //   }
-  //   if (document.querySelector(".message_active")) {
-  //     document.querySelector(".message_active").style.display = "none";
-  //   }
-  //   if (document.querySelector(".message_inactive")) {
-  //     document.querySelector(".message_inactive").style.display = "block";
-  //   }
-  //   if (document.getElementById("disclaimer_btn")) {
-  //     document.getElementById("disclaimer_btn").style.display = "none";
-  //   }
-  //   if (document.querySelector(".shuffle_close_section")) {
-  //     document.querySelector(".shuffle_close_section").style.display = "flex";
-  //   }
-  //   if (document.querySelector(".message-section")) {
-  //     document.querySelector(".message-section").style.display = "none";
-  //   }
-  //   clearInterval(x);
-  //   document.getElementById("days").innerText = "0";
-  //   document.getElementById("hours").innerText = "0";
-  //   document.getElementById("minutes").innerText = "0";
-  //   document.getElementById("seconds").innerText = "0";
-  // }
+  if (distance < 0) {
+    if (document.querySelector(".button_connect")) {
+      // document.querySelector('.button_connect').disabled = true;
+    }
+    if (document.querySelector(".message_active")) {
+      document.querySelector(".message_active").style.display = "none";
+    }
+    if (document.querySelector(".message_inactive")) {
+      document.querySelector(".message_inactive").style.display = "block";
+    }
+    if (document.getElementById("disclaimer_btn")) {
+      document.getElementById("disclaimer_btn").style.display = "none";
+    }
+    if (document.querySelector(".shuffle_close_section")) {
+      document.querySelector(".shuffle_close_section").style.display = "flex";
+    }
+    if (document.querySelector(".message-section")) {
+      document.querySelector(".message-section").style.display = "none";
+    }
+    clearInterval(x);
+    document.getElementById("days").innerText = "0";
+    document.getElementById("hours").innerText = "0";
+    document.getElementById("minutes").innerText = "0";
+    document.getElementById("seconds").innerText = "0";
+  }
 }, 1000);
