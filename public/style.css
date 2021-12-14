@@ -1,200 +1,201 @@
-body{
-    background-color: #171717;
-    color: white;
-    font-family: 'Open Sans', sans-serif;
+body {
+  background-color: #171717;
+  color: white;
+  font-family: "Open Sans", sans-serif;
 }
-.active{
-    font-weight: bold;
-    color: #B586FA !important;
+.active {
+  font-weight: bold;
+  color: #b586fa !important;
 }
-.nav{
-    margin-top: 2em;
-    font-size: 1.5em;
-    font-weight: lighter;
+.nav {
+  margin-top: 2em;
+  font-size: 1.5em;
+  font-weight: lighter;
 }
-.nav-item{
-    padding: 1.4em;
+.nav-item {
+  padding: 1.4em;
 }
-.nav-item a{
-    color: white;
-    text-decoration: none;
+.nav-item a {
+  color: white;
+  text-decoration: none;
 }
-.logo{
-    margin: 1em 0;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 25em;
+.logo {
+  margin: 1em 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25em;
+  padding-top: 0 !important;
 }
-.counter{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 0.5em;
-    font-size: 2em;
-    text-align: center;
+.counter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5em;
+  font-size: 2em;
+  text-align: center;
 }
-.counter-item{
-    padding: 1em 0.3em 0 1em;
+.counter-item {
+  padding: 1em 0.3em 0 1em;
 }
-.counternum{
-    font-size: 2.5em;
-    font-weight: bold;
+.counternum {
+  font-size: 2.5em;
+  font-weight: bold;
 }
-.message_shuffle_off{
-    text-align: center;
-    font-size: 1em;
+.message_shuffle_off {
+  text-align: center;
+  font-size: 1em;
 }
-.shuffle_close_section{
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+.shuffle_close_section {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
-.participantsnum{
-    font-size: 1.5em;
-    color: #B586FA;
-    font-weight: bolder;
+.participantsnum {
+  font-size: 1.5em;
+  color: #b586fa;
+  font-weight: bolder;
 }
-.connect-btn{
-    border-radius: 5px;
-    background-color: #B586FA;
-    color: white;
-    font-weight: bold;
-    width: 10em;
-    height: 3em;
-    margin: 0 auto;
-    margin-bottom: 7px!important;
+.connect-btn {
+  border-radius: 5px;
+  background-color: #b586fa;
+  color: white;
+  font-weight: bold;
+  width: 10em;
+  height: 3em;
+  margin: 0 auto;
+  margin-bottom: 7px !important;
 }
-.participate-section{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
+.participate-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
-.disclaimerModal{
-    /* background-color: black; */
-    color: white;
+.disclaimerModal {
+  /* background-color: black; */
+  color: white;
 }
-.modal-content{
-    background-color: black;
+.modal-content {
+  background-color: black;
 }
-.message{
-    font-size: 1em;
-    text-align: center;
+.message {
+  font-size: 1em;
+  text-align: center;
 }
-.message_inactive{
-    font-size: 1em;
+.message_inactive {
+  font-size: 1em;
 }
-.backtohome{
-    width: 40%;
-    padding-top: 48px;
+.backtohome {
+  width: 40%;
+  padding-top: 48px;
 }
-.message-section{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+.message-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
-.form-btn{
-    border-radius: 5px;
-    background-color: #B586FA;
-    color: white;
-    font-weight: bold;
-    width: 10em;
-    height: 3em;
-    margin: 0 auto;
-    margin-bottom: 7px!important;
+.form-btn {
+  border-radius: 5px;
+  background-color: #b586fa;
+  color: white;
+  font-weight: bold;
+  width: 10em;
+  height: 3em;
+  margin: 0 auto;
+  margin-bottom: 7px !important;
 }
 @media only screen and (max-width: 960px) {
-    .nav{
-        font-size: 1.2em;
-    }
-    .counter-item{
-        font-size: 0.5em;
-    }
-    .counternum{
-        font-size: 4em !important;
-    }
-    .message{
-        font-size: 1em;
-    }
-    .logo{
-        margin: 0 auto;
-        width: 33em;
-        padding: 1.5em;
-    }
-    .nav-item{
-        padding: 1.1em;
-    }
+  .nav {
+    font-size: 1.2em;
+  }
+  .counter-item {
+    font-size: 0.5em;
+  }
+  .counternum {
+    font-size: 4em !important;
+  }
+  .message {
+    font-size: 1em;
+  }
+  .logo {
+    margin: 0 auto;
+    width: 33em;
+    padding: 1.5em;
+  }
+  .nav-item {
+    padding: 1.1em;
+  }
 }
 @media only screen and (max-width: 770px) {
-    .nav{
-        font-size: 1em;
-    }
-    .nav-item{
-        padding: 1em;
-    }
-    .logo{
-        padding-bottom: 0;
-    }
-    .participantsnum{
-        font-size: 1em.3;
-    }
+  .nav {
+    font-size: 1em;
+  }
+  .nav-item {
+    padding: 1em;
+  }
+  .logo {
+    padding-bottom: 0;
+  }
+  .participantsnum {
+    font-size: 1em.3;
+  }
 }
 @media only screen and (max-width: 560px) {
-    .nav{
-        font-size: 1em;
-    }
-    .nav-item{
-        padding: 0.5em;
-    }
-    .logo{
-        padding-bottom: 0;
-        padding-top: 4em;
-        width: 29em;
-    }
-    .counter-item{
-        font-size: 0.5em;
-        padding-bottom: 0.5em;
-    }
-    .counternum{
-        font-size: 3em !important;
-    }
-    .counter{
-        margin-bottom: 1em;
-        margin-top: 1em;
-    }
-    .connect-btn{
-        width: 9em;
-        height: 2.4em;
-    }
+  .nav {
+    font-size: 1em;
+  }
+  .nav-item {
+    padding: 0.5em;
+  }
+  .logo {
+    padding-bottom: 0;
+    padding-top: 4em;
+    width: 29em;
+  }
+  .counter-item {
+    font-size: 0.5em;
+    padding-bottom: 0.5em;
+  }
+  .counternum {
+    font-size: 3em !important;
+  }
+  .counter {
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+  .connect-btn {
+    width: 9em;
+    height: 2.4em;
+  }
 }
 @media only screen and (max-width: 560px) {
-    .nav{
-        font-size: 0.7em;
-    }
-    .nav-item{
-        padding: 0.3em;
-    }
-    .logo{
-        padding-bottom: 0;
-        padding-top: 3.5em;
-        width: 20em;
-    }
-    .counter-item{
-        font-size: 0.4em;
-        padding-bottom: 0.2em;
-    }
-    .counternum{
-        font-size: 3em !important;
-    }
-    .message{
-        font-size: 0.8em;
-    }
-    .counter{
-        margin-bottom: 1.5em;
-        margin-top: 1em;
-    }
-    .participantsnum{
-        font-size: 1.3em;
-    }
+  .nav {
+    font-size: 0.7em;
+  }
+  .nav-item {
+    padding: 0.3em;
+  }
+  .logo {
+    padding-bottom: 0;
+    padding-top: 3.5em;
+    width: 20em;
+  }
+  .counter-item {
+    font-size: 0.4em;
+    padding-bottom: 0.2em;
+  }
+  .counternum {
+    font-size: 3em !important;
+  }
+  .message {
+    font-size: 0.8em;
+  }
+  .counter {
+    margin-bottom: 1.5em;
+    margin-top: 1em;
+  }
+  .participantsnum {
+    font-size: 1.3em;
+  }
 }

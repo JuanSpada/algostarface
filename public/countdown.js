@@ -31,8 +31,11 @@ var x = setInterval(function () {
     if (document.querySelector(".message_inactive")) {
       document.querySelector(".message_inactive").style.display = "block";
     }
-    if (document.getElementById("disclaimer_btn")) {
-      document.getElementById("disclaimer_btn").style.display = "none";
+    // Estamos mostrnado winner?
+    if (!true) {
+      if (document.getElementById("disclaimer_btn")) {
+        document.getElementById("disclaimer_btn").style.display = "none";
+      }
     }
     if (document.querySelector(".shuffle_close_section")) {
       document.querySelector(".shuffle_close_section").style.display = "flex";

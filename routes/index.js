@@ -7,7 +7,7 @@ const fs = require("fs");
 
 router.use(cookieParser());
 // VARIABLE DE SHOW WINNERS PARA ACTIVAR ESO
-const showWinners = true;
+const showWinners = false;
 
 router.get("/", async (req, res) => {
   // res.clearCookie("participated2");
@@ -16,41 +16,41 @@ router.get("/", async (req, res) => {
   console.log(req.cookies);
   const countUsers = await User.countDocuments();
 
-  const query = { walletId: req.cookies.participated };
+  const query = { walletId: req.cookies.participated2 };
   const user = await User.findOne(query);
 
+  console.log(user);
   //si participaste
   if ("participated2" in req.cookies) {
     console.log("participo");
-    res.render("index", {
-      participated: 1,
-      amountParticipated: countUsers,
-      winner: true,
-      showWinners,
-      walletId: req.cookies.participated,
-    });
-    // si hay user quiere decir que participaste y ganaste
-    // if (user) {
-    //   if ("participated2" in req.cookies && user["winner"]) {
-    //     console.log("participo y es winner");
-    //     res.render("index", {
-    //       participated: 1,
-    //       amountParticipated: countUsers,
-    //       winner: true,
-    //       showWinners,
-    //       walletId: req.cookies.participated,
-    //     });
-    //   } else {
-    //     console.log("participo y no es winner");
-    //     res.render("index", {
-    //       participated: 0,
-    //       amountParticipated: countUsers,
-    //       winner: false,
-    //       showWinners,
-    //       walletId: req.cookies.participated,
-    //     });
-    //   }
-    // }
+    // res.render("index", {
+    //   participated: 1,
+    //   amountParticipated: countUsers,
+    //   winner: true,
+    //   showWinners,
+    //   walletId: req.cookies.participated2,
+    // });
+    if (user) {
+      if ("participated2" in req.cookies && user["winner"]) {
+        console.log("participo y es winner");
+        res.render("index", {
+          participated: 1,
+          amountParticipated: countUsers,
+          winner: true,
+          showWinners,
+          walletId: req.cookies.participated2,
+        });
+      } else {
+        console.log("participo y no es winner");
+        res.render("index", {
+          participated: 0,
+          amountParticipated: countUsers,
+          winner: false,
+          showWinners,
+          walletId: req.cookies.participated2,
+        });
+      }
+    }
   } else {
     //si no participaste
     console.log("no participaste");
@@ -59,10 +59,11 @@ router.get("/", async (req, res) => {
       amountParticipated: countUsers,
       winner: false,
       showWinners,
-      walletId: req.cookies.participated,
+      walletId: req.cookies.participated2,
     });
   }
 });
+
 router.post("/", async (req, res) => {
   let user = new User({
     walletId: req.body.walletId,
