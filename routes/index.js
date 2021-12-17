@@ -25,7 +25,8 @@ router.get("/", async (req, res) => {
   const shuffle = settings.shuffle_status;
   const winners = settings.show_winners;
   let date = settings.shuffle_date;
-  date = moment.tz(date, "America/New_York").format()
+  // date = moment.tz(date, "America/New_York").format()
+  // date = moment.utc(date).tz("America/Toronto");
   date = new Date(date)
   let disclaimer_date = hdate.prettyPrint(date, { showTime: true })
   console.log('Fecha: ', date)
