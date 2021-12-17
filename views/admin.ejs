@@ -1,0 +1,35 @@
+<section class="admin">
+    <img class="logo" src="./LOGO3.png" alt="">
+    <h1 class="text-center mt-3">Admin Shuffle - Algo Starface</h1>
+    <div class="d-flex justify-content-center flex-column pt-3 col-lg-6 m-auto">
+        <input class="form-control" type="date" name="shuffle_date" id="shuffle_date">
+        <label for="" class="mt-3">Horas, Minutos y el precio del NFT:</label>
+        <div class="row">
+            <div class="col-6 mt-2 d-flex">
+                <input class="form-control" type="number" name="shuffle_hour" id="shuffle_hour" placeholder="Horas">
+                <input class="form-control" type="number" name="shuffle_minutes" id="shuffle_minutes" placeholder="Minutos">
+            </div>
+            <div class="col-6 mt-2 d-flex">
+                <input type="number" class="form-control" placeholder="60">
+            </div>
+        </div>
+        <label class="mt-3" for="shuffle_status">Seleccionar si se puede jugar al shuffle o no:</label>
+        <select class="form-control" name="shuffle_status" id="shuffle_status">
+            <option value="on" selected>Shuffle On</option>
+            <option value="off">Shuffle Off</option>
+        </select>
+        <label class="mt-3" for="show_winners">Seleccionar si hay que mostrar ganadores:</label>
+        <select class="form-control" name="show_winners" id="show_winners">
+            <option value="on" selected>Mostrar</option>
+            <option value="off">No Mostrar</option>
+        </select>
+        <button class="btn btn-primary mt-3">Update Date</button>
+        <p class="mt-2"><strong>¡CUIDADO!</strong></p>
+        <ul>
+            <li>Formato en fechas EST y 24hs (osea no existe 3pm, sería 15)</li>
+            <li>Shuffle On: significa si se puede jugar o no al shuffle, en caso de que este apagado va a aparecer en pantalla: Next shuffle will be open for registration on X EST y el contador a la fecha que este asignada aca arriba (osea nadie se va a poder suscribir)</li>
+            <li>Mostrar ganadores: significa que ya marcamos los ganadores en la base de datos entonces les va a aparecer si perdieron o si ganaron. Si está off va a aparecer que el shuffle está cerrado y que los winners van a aparecer pronto. Si el contador no termino no va a pasar nada.</li>
+            <li>Nft Price es el precio de la venta que aparece en el disclaimer</li>
+        </ul>
+    </div>
+</section>
