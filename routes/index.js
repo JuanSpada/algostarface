@@ -10,7 +10,8 @@ router.use(cookieParser());
 const showWinners = false;
 
 router.get("/", async (req, res) => {
-  // res.clearCookie("participated2");
+  res.clearCookie("participated2");
+  res.clearCookie("participated1");
   res.setHeader("Access-Control-Allow-Headers", "*");
 
   console.log(req.cookies);
