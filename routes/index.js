@@ -1,29 +1,40 @@
 const express = require("express");
 const router = express.Router();
 const User = require("./../models/user");
+const Settings = require("./../models/settings");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const fs = require("fs");
 const { now } = require("mongoose");
+const moment = require('moment-timezone');
+const hdate = require('human-date')
 
 router.use(cookieParser());
+
+// const shuffle = true; // si se puede jugar al shuffle o no
+// // const shuffleStatus = true; // el estado del shuffle, COMNETADO POR Q LO AGARRAMOS EN BASE A LA FECHA
+// const winners = false; // esto quiere decir el estado de los ganadores, si no los tenemos o los tenemos cuando el shuffle esta closed
+// fijarse si tiene cookies
 
 router.get("/", async (req, res) => {
   res.setHeader("Access-Control-Allow-Headers", "*");
   // console.log("Cookies: ", req.cookies);
-  console.log("Sessions: ", req.session);
+  // console.log("Sessions: ", req.session);
   // PROBAMOS SI EL SHUFFLE ESTA ABIERTO EN BASE A LA FECHA
-  let date = new Date("12/17/2021 16:00:00 EST").getTime();
+  let settings = await Settings.findOne();
+  const shuffle = settings.shuffle_status;
+  const winners = settings.show_winners;
+  let date = settings.shuffle_date;
+  date = moment.tz(date, "America/New_York").format()
+  date = new Date(date)
+  let disclaimer_date = hdate.prettyPrint(date, { showTime: true })
+  console.log('Fecha: ', date)
+  // let date = new Date("12/17/2021 16:00:00 EST").getTime();
   if (date < new Date().getTime()) {
     shuffleStatus = false;
   } else {
     shuffleStatus = true;
   }
-
-  let shuffle = true; // si se puede jugar al shuffle o no
-  // let shuffleStatus = true; // el estado del shuffle, COMNETADO POR Q LO AGARRAMOS EN BASE A LA FECHA
-  let winners = false; // esto quiere decir el estado de los ganadores, si no los tenemos o los tenemos cuando el shuffle esta closed
-  // fijarse si tiene cookies
 
   if (req.session.walletId) {
     if (shuffleStatus) {
@@ -35,6 +46,9 @@ router.get("/", async (req, res) => {
         shuffleStatus: shuffleStatus, // pasamos el estado del shuffle
         walletId: req.cookies.participated2, // le pasamos el wallet id
         amountParticipated: countUsers, // pasamos la cantidad de participantes
+        settings: settings,
+        date: date,
+        disclaimer_date: disclaimer_date,
       });
     } else {
       /////no esta abierto el shuffle
@@ -49,6 +63,9 @@ router.get("/", async (req, res) => {
         shuffleStatus: shuffleStatus, // pasamos el estado del shuffle
         walletId: req.cookies.participated2, // le pasamos el wallet id
         hasWon: user["winner"], // le pasamos si gano o perdió
+        settings: settings,
+        date: date,
+        disclaimer_date: disclaimer_date,
       });
     }
   } else {
@@ -58,17 +75,10 @@ router.get("/", async (req, res) => {
       shuffle: shuffle, // si se puede participar o no
       participated: false, // pasamos si participo o no participo
       shuffleStatus: shuffleStatus, // pasamos el estado del shuffle
+      settings: settings,
+      date: date,
+      disclaimer_date: disclaimer_date
     });
-  }
-});
-
-router.get("/admin", async (req, res) => {
-  if(req.session.walletId == "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74"){
-    console.log('sos admin')
-    res.render("admin");
-  }else{
-    console.log('no sos admin')
-    res.redirect('/');
   }
 });
 
@@ -96,6 +106,50 @@ router.post("/", async (req, res) => {
       //done!
     });
     user = await user.save();
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+//admin
+router.get("/admin", async (req, res) => {
+  let settings = await Settings.findOne();
+  date = new Date(settings.shuffle_date);
+  function toJSONLocal(date) {
+    var local = new Date(date);
+    local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    return local.toJSON().slice(0, 10);
+  }
+  console.log(date.getTime())
+  let hours = date.getHours()
+  let minutes = date.getMinutes()
+  date = toJSONLocal(date) + "T" + hours + ":" + minutes;
+  console.log(settings);
+  if (
+    req.session.walletId ==
+    "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" || req.session.walletId == "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
+  ) {
+    res.render("admin", {
+      settings: settings,
+      shuffle_date: date,
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
+router.post("/admin", async (req, res) => {
+  let settings = await Settings.findOne();
+  let date = req.body.shuffle_date;
+  // date = new Date(date)
+  // console.log(date);
+  settings.shuffle_date = date;
+  settings.shuffle_status = req.body.shuffle_status;
+  settings.show_winners = req.body.show_winners;
+  settings.nft_price = req.body.nft_price;
+  try {
+    settings = await settings.save();
+    res.redirect("/admin");
   } catch (e) {
     console.log(e);
   }

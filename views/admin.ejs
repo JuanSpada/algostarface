@@ -2,28 +2,35 @@
     <img class="logo" src="./LOGO3.png" alt="">
     <h1 class="text-center mt-3">Admin Shuffle - Algo Starface</h1>
     <div class="d-flex justify-content-center flex-column pt-3 col-lg-6 m-auto">
-        <input class="form-control" type="date" name="shuffle_date" id="shuffle_date">
-        <label for="" class="mt-3">Horas, Minutos y el precio del NFT:</label>
-        <div class="row">
-            <div class="col-6 mt-2 d-flex">
-                <input class="form-control" type="number" name="shuffle_hour" id="shuffle_hour" placeholder="Horas">
-                <input class="form-control" type="number" name="shuffle_minutes" id="shuffle_minutes" placeholder="Minutos">
-            </div>
-            <div class="col-6 mt-2 d-flex">
-                <input type="number" class="form-control" placeholder="60">
-            </div>
-        </div>
-        <label class="mt-3" for="shuffle_status">Seleccionar si se puede jugar al shuffle o no:</label>
-        <select class="form-control" name="shuffle_status" id="shuffle_status">
-            <option value="on" selected>Shuffle On</option>
-            <option value="off">Shuffle Off</option>
-        </select>
-        <label class="mt-3" for="show_winners">Seleccionar si hay que mostrar ganadores:</label>
-        <select class="form-control" name="show_winners" id="show_winners">
-            <option value="on" selected>Mostrar</option>
-            <option value="off">No Mostrar</option>
-        </select>
-        <button class="btn btn-primary mt-3">Guardar</button>
+        <form method="post">
+            <label for="shuffle_date">Fecha</label>
+            <input type="text" hidden id="db_date" name="db_date" value=<%= shuffle_date %> >
+            <input class="form-control" type="datetime-local" name="shuffle_date" id="shuffle_date" value=<%= shuffle_date %>>
+            <!-- <input class="form-control" type="time" name="shuffle_time" id="shuffle_time"> -->
+            <label class="mt-3" for="shuffle_status">Seleccionar si se puede jugar al shuffle o no:</label>
+            <select class="form-control" name="shuffle_status" id="shuffle_status">
+                <% if (settings.shuffle_status) { %>
+                    <option value="1" selected>Shuffle On</option>
+                    <option value="0" >Shuffle Off</option>
+                 <% } else { %>
+                    <option value="1">Shuffle On</option>
+                    <option value="0" selected>Shuffle Off</option>
+                <% } %>
+            </select>
+            <label class="mt-3" for="show_winners">Seleccionar si hay que mostrar ganadores:</label>
+            <select class="form-control" name="show_winners" id="show_winners">
+                <% if (settings.show_winners) { %>
+                    <option value="1" selected>Mostrar</option>
+                    <option value="0" >No Mostrar</option>
+                 <% } else { %>
+                    <option value="1">Mostrar</option>
+                    <option value="0" selected>No Mostrar</option>
+                <% } %>
+            </select>
+            <label for="nft_price" class="mt-3">Precio del NFT:</label>
+            <input type="number" class="form-control" name="nft_price" id="nft_price" value=<%= settings.nft_price %>>
+            <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+        </form>
         <p class="mt-2"><strong>¡CUIDADO!</strong></p>
         <ul>
             <li>Formato en fechas EST y 24hs (osea no existe 3pm, sería 15)</li>
@@ -33,3 +40,8 @@
         </ul>
     </div>
 </section>
+<script>
+    let dbDate = document.querySelector('#db_date')
+    let shuffle_date = document.querySelector('#shuffle_date')
+    shuffle_date.value = dbDate.value;
+</script>
