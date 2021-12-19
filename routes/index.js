@@ -18,19 +18,9 @@ router.use(cookieParser());
 
 router.get("/", async (req, res) => {
   res.setHeader("Access-Control-Allow-Headers", "*");
-  // console.log("Cookies: ", req.cookies);
-  // console.log("Sessions: ", req.session);
-  // PROBAMOS SI EL SHUFFLE ESTA ABIERTO EN BASE A LA FECHA
   let settings = await Settings.findOne();
   const shuffle = settings.shuffle_status;
   const winners = settings.show_winners;
-  // let date = Date(settings.shuffle_date);
-  // date.toLocaleString("en-US", {timeZone: "America/New_York"});
-  // let date = settings.shuffle_date;
-  // console.log("Shuffle Date on db: ", settings.shuffle_date);
-  // let dateString = settings.shuffle_date.split(" ");
-  // date = dateString[0] + "T" + dateString[1] 
-  // date = new Date(date);
   let date = settings.shuffle_date
   console.log('esta date: ', date)
   let disclaimer_date = hdate.prettyPrint(date, { showTime: true });

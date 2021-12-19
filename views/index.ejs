@@ -111,7 +111,7 @@
   <!-- SI NO SE PUEDE PARTICIPAR -->
   <p class="text-center">Next shuffle will be open for registration on Monday 20 at 4PM EST</p>
 <% } %>
-<input hidden type="text" name="shuffle_date" id="shuffle_date" value="<%= date %> ">
+<input hidden type="text" name="shuffle_date" id="shuffle_date" value="<%= date %>">
 
 <!-- Modal -->
 <div class="modal fade disclaimerModal" id="disclaimer" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -140,11 +140,10 @@ tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
     </div>
 </div>
 </div>
-
+<h1></h1>
 <script>
   let inputDate = document.querySelector('#shuffle_date')
   // Set the date we're counting down to
-  console.log(inputDate.value)
   date = new Date(inputDate.value + " EST");
   let countDownDate = new Date(date).getTime();
 
