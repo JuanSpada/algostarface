@@ -144,10 +144,12 @@ tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
 <script>
   let inputDate = document.querySelector('#shuffle_date')
   // Set the date we're counting down to
-var countDownDate = new Date(inputDate.value).getTime();
+  date = new Date(inputDate.value);
+  console.log(date)
+  var countDownDate = new Date(date).getTime();
 
-// Update the count down every 1 second
-var x = setInterval(function () {
+  // Update the count down every 1 second
+  var x = setInterval(function () {
   // Get today's date and time
   var now = new Date().getTime();
 

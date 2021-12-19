@@ -6,8 +6,8 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const fs = require("fs");
 const { now } = require("mongoose");
-const moment = require('moment-timezone');
-const hdate = require('human-date')
+const moment = require("moment-timezone");
+const hdate = require("human-date");
 
 router.use(cookieParser());
 
@@ -25,12 +25,8 @@ router.get("/", async (req, res) => {
   const shuffle = settings.shuffle_status;
   const winners = settings.show_winners;
   let date = settings.shuffle_date;
-  // date = moment.tz(date, "America/New_York").format()
-  // date = moment.utc(date).tz("America/Toronto");
-  date = new Date(date)
-  let disclaimer_date = hdate.prettyPrint(date, { showTime: true })
-  console.log('Fecha: ', date)
-  // let date = new Date("12/17/2021 16:00:00 EST").getTime();
+  console.log("Shuffle Date on db: ", settings.shuffle_date);
+  let disclaimer_date = hdate.prettyPrint(date, { showTime: true });
   if (date < new Date().getTime()) {
     shuffleStatus = false;
   } else {
@@ -78,7 +74,7 @@ router.get("/", async (req, res) => {
       shuffleStatus: shuffleStatus, // pasamos el estado del shuffle
       settings: settings,
       date: date,
-      disclaimer_date: disclaimer_date
+      disclaimer_date: disclaimer_date,
     });
   }
 });
@@ -115,20 +111,16 @@ router.post("/", async (req, res) => {
 //admin
 router.get("/admin", async (req, res) => {
   let settings = await Settings.findOne();
-  date = new Date(settings.shuffle_date);
-  function toJSONLocal(date) {
-    var local = new Date(date);
-    local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-    return local.toJSON().slice(0, 10);
-  }
-  console.log(date.getTime())
-  let hours = date.getHours()
-  let minutes = date.getMinutes()
-  date = toJSONLocal(date) + "T" + hours + ":" + minutes;
+  console.log(settings.shuffle_date);
+  let dateString = settings.shuffle_date.split(" ");
+  console.log("dateString", dateString);
+  let date = dateString[0] + "T" + dateString[1] 
   console.log(settings);
   if (
     req.session.walletId ==
-    "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" || req.session.walletId == "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
+      "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
+    req.session.walletId ==
+      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
   ) {
     res.render("admin", {
       settings: settings,
@@ -142,8 +134,8 @@ router.get("/admin", async (req, res) => {
 router.post("/admin", async (req, res) => {
   let settings = await Settings.findOne();
   let date = req.body.shuffle_date;
-  // date = new Date(date)
-  // console.log(date);
+  date = moment.tz(date, "America/New_York").format("YYYY-MM-DD HH:mm");
+  console.log("NY DATE: ", date);
   settings.shuffle_date = date;
   settings.shuffle_status = req.body.shuffle_status;
   settings.show_winners = req.body.show_winners;

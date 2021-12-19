@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const settingsSchema = new mongoose.Schema({
     shuffle_date: {
-        type: Date,
+        type: String,
         required: true,
     },
     shuffle_status: {
