@@ -3,7 +3,7 @@
     <h1 class="text-center mt-3">Admin Shuffle - Algo Starface</h1>
     <div class="d-flex justify-content-center flex-column pt-3 col-lg-6 m-auto">
         <form method="post">
-            <label for="shuffle_date">Fecha</label>
+            <label for="shuffle_date">Fecha y Hora EST:</label>
             <input type="text" hidden id="db_date" name="db_date" value=<%= shuffle_date %> >
             <input class="form-control" type="datetime-local" name="shuffle_date" id="shuffle_date" value=<%= shuffle_date %>>
             <!-- <input class="form-control" type="time" name="shuffle_time" id="shuffle_time"> -->
@@ -33,7 +33,7 @@
         </form>
         <p class="mt-2"><strong>¡CUIDADO!</strong></p>
         <ul>
-            <li>Formato en fechas EST y 24hs (osea no existe 3pm, sería 15)</li>
+            <li>La fecha es en EST</li>
             <li>Shuffle On: significa si se puede jugar o no al shuffle, en caso de que este apagado va a aparecer en pantalla: Next shuffle will be open for registration on X EST y el contador a la fecha que este asignada aca arriba (osea nadie se va a poder suscribir)</li>
             <li>Mostrar ganadores: significa que ya marcamos los ganadores en la base de datos entonces les va a aparecer si perdieron o si ganaron. Si está off va a aparecer que el shuffle está cerrado y que los winners van a aparecer pronto. Si el contador no termino no va a pasar nada.</li>
             <li>Nft Price es el precio de la venta que aparece en el disclaimer</li>

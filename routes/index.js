@@ -24,8 +24,15 @@ router.get("/", async (req, res) => {
   let settings = await Settings.findOne();
   const shuffle = settings.shuffle_status;
   const winners = settings.show_winners;
-  let date = settings.shuffle_date;
-  console.log("Shuffle Date on db: ", settings.shuffle_date);
+  // let date = Date(settings.shuffle_date);
+  // date.toLocaleString("en-US", {timeZone: "America/New_York"});
+  // let date = settings.shuffle_date;
+  // console.log("Shuffle Date on db: ", settings.shuffle_date);
+  // let dateString = settings.shuffle_date.split(" ");
+  // date = dateString[0] + "T" + dateString[1] 
+  // date = new Date(date);
+  let date = settings.shuffle_date
+  console.log('esta date: ', date)
   let disclaimer_date = hdate.prettyPrint(date, { showTime: true });
   if (date < new Date().getTime()) {
     shuffleStatus = false;
@@ -88,19 +95,16 @@ router.post("/", async (req, res) => {
   });
   const users = await User.find({});
   req.session.walletId = req.body.walletId;
+
+  // Mandamos los participantes a un log por las dudas
   try {
-    // res.cookie('participated', req.body.walletId, { maxAge: 60*60*24*7  }); //3 min, esta en miliseconds
-    // res.cookie("participated2", req.body.walletId, {
-    //   expire: new Date() + 9999,
-    // });
     res.send("Cookie have been saved successfully");
-    const content = req.body.walletId + "\n";
+    const content = "Wallet Id: " + req.body.walletId + "Created At: " + Date.now() + "\n";
     fs.appendFile("participants.log", content, (err) => {
       if (err) {
         console.error(err);
         return;
       }
-      //done!
     });
     user = await user.save();
   } catch (e) {
@@ -111,11 +115,8 @@ router.post("/", async (req, res) => {
 //admin
 router.get("/admin", async (req, res) => {
   let settings = await Settings.findOne();
-  console.log(settings.shuffle_date);
   let dateString = settings.shuffle_date.split(" ");
-  console.log("dateString", dateString);
   let date = dateString[0] + "T" + dateString[1] 
-  console.log(settings);
   if (
     req.session.walletId ==
       "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
