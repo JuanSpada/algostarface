@@ -140,13 +140,13 @@ tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
     </div>
 </div>
 </div>
-<h1></h1>
+<h1><%= date %></h1>
 <script>
   let inputDate = document.querySelector('#shuffle_date')
   // Set the date we're counting down to
   date = new Date(inputDate.value + " EST");
   let countDownDate = new Date(date).getTime();
-
+  countDownDate = parseInt(countDownDate)
   // Update the count down every 1 second
   let x = setInterval(function () {
   // Get today's date and time
