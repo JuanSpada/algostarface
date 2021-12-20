@@ -7,7 +7,7 @@ const fs = require("fs");
 
 router.use(cookieParser());
 // VARIABLE DE SHOW WINNERS PARA ACTIVAR ESO
-const showWinners = false;
+const showWinners = true;
 
 router.get("/", async (req, res) => {
   res.clearCookie("participated2");
@@ -17,50 +17,59 @@ router.get("/", async (req, res) => {
   console.log(req.cookies);
   const countUsers = await User.countDocuments();
 
-  const query = { walletId: req.cookies.participated2 };
+  const query = { walletId: req.cookies.participated3 };
   const user = await User.findOne(query);
 
   console.log(user);
   //si participaste
-  if ("participated2" in req.cookies) {
+  console.log(req.cookies)
+  if ("participated3" in req.cookies) {
     console.log("participo");
-    // res.render("index", {
-    //   participated: 1,
-    //   amountParticipated: countUsers,
-    //   winner: true,
-    //   showWinners,
-    //   walletId: req.cookies.participated2,
-    // });
-    if (user) {
-      if ("participated2" in req.cookies && user["winner"]) {
-        console.log("participo y es winner");
-        res.render("index", {
-          participated: 1,
-          amountParticipated: countUsers,
-          winner: true,
-          showWinners,
-          walletId: req.cookies.participated2,
-        });
-      } else {
-        console.log("participo y no es winner");
-        res.render("index", {
-          participated: 0,
-          amountParticipated: countUsers,
-          winner: false,
-          showWinners,
-          walletId: req.cookies.participated2,
-        });
-      }
-    }
-  } else {
-    //si no participaste
-    console.log("no participaste");
     res.render("index", {
-      participated: 3,
+      participated: 1,
       amountParticipated: countUsers,
-      winner: false,
+      winner: true,
       showWinners,
-      walletId: req.cookies.participated2,
+      walletId: req.cookies.participated3,
+    });
+  //   if (user) {
+  //     if ("participated3" in req.cookies && user["winner"]) {
+  //       console.log("participo y es winner");
+  //       res.render("index", {
+  //         participated: 1,
+  //         amountParticipated: countUsers,
+  //         winner: true,
+  //         showWinners,
+  //         walletId: req.cookies.participated3,
+  //       });
+  //     } else {
+  //       console.log("participo y no es winner");
+  //       res.render("index", {
+  //         participated: 0,
+  //         amountParticipated: countUsers,
+  //         winner: false,
+  //         showWinners,
+  //         walletId: req.cookies.participated3,
+  //       });
+  //     }
+  //   }
+  // } else {
+  //   //si no participaste
+  //   console.log("no participaste");
+  //   res.render("index", {
+  //     participated: 4,
+  //     amountParticipated: countUsers,
+  //     winner: false,
+  //     showWinners,
+  //     walletId: req.cookies.participated3,
+  //   });
+  }else{
+    res.render("index", {
+      participated: 4,
+      amountParticipated: countUsers,
+      winner: true,
+      showWinners,
+      walletId: req.cookies.participated3,
     });
   }
 });
@@ -75,7 +84,7 @@ router.post("/", async (req, res) => {
   const users = await User.find({});
   try {
     // res.cookie('participated', req.body.walletId, { maxAge: 60*60*24*7  }); //3 min, esta en miliseconds
-    res.cookie("participated2", req.body.walletId, {
+    res.cookie("participated3", req.body.walletId, {
       expire: new Date() + 9999,
     });
     res.send("Cookie have been saved successfully");
