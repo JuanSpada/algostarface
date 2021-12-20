@@ -145,7 +145,7 @@ tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
   let inputDate = document.querySelector('#shuffle_date')
   // Set the date we're counting down to
   let countDownDate = new Date(inputDate.value + ":00" + " EST").getTime();
-  document.querySelector('#mostraralgo').innerText = countDownDate
+  document.querySelector('#mostraralgo').innerText = inputDate.value
   // Update the count down every 1 second
   let x = setInterval(function () {
   // Get today's date and time
