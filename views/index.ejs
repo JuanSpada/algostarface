@@ -109,7 +109,7 @@
   <% } %>
  <% } else { %>
   <!-- SI NO SE PUEDE PARTICIPAR -->
-  <p class="text-center">Next shuffle will be open for registration on Monday 20 at 4PM EST</p>
+  <p class="text-center">Next shuffle will be open for registration on <%= disclaimer_date %> EST</p>
 <% } %>
 <input hidden type="text" name="shuffle_date" id="shuffle_date" value="<%= date %>">
 
@@ -145,7 +145,7 @@ tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
   let inputDate = document.querySelector('#shuffle_date')
   // Set the date we're counting down to
   let countDownDate = new Date(inputDate.value + " EST").getTime();
-  document.querySelector('#mostraralgo').innerText = countDownDate
+  document.querySelector('#mostraralgo').innerText = inputDate.value
   // Update the count down every 1 second
   let x = setInterval(function () {
   // Get today's date and time
