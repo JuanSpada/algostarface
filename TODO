@@ -1,1 +1,4 @@
-si termina en 0 los segundos no deja el default value el input en admin de la fecha y hora
+- VALIDACIONES
+- RESET SESSIONS EN DB
+- RESET SESSIONS COOKIES
+- VER TODAS LAS WALLET Y ELIMINARLAS

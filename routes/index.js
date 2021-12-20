@@ -21,13 +21,32 @@ router.get("/", async (req, res) => {
   let settings = await Settings.findOne();
   const shuffle = settings.shuffle_status;
   const winners = settings.show_winners;
-  let date = settings.shuffle_date
-  console.log('esta date: ', date)
+  let date = settings.shuffle_date;
+  console.log("esta date: ", date);
   let disclaimer_date = hdate.prettyPrint(date, { showTime: true });
   if (date < new Date().getTime()) {
     shuffleStatus = false;
   } else {
     shuffleStatus = true;
+  }
+
+  //SI NO PARTICIPO RESETEAMOS COOKIES PARA Q VUELVA A PARTICIPAR, ESTO ES PARA RESETEAR LOS SHUFFLE
+  let user = await User.findOne({ walletId: req.session.walletId });
+
+  if (user) {
+    if (!user.participo) {
+      // si el user no participo le renderizamos para que participe de nuevo
+      console.log(user);
+      res.clearCookie("connect.sid");
+      res.render("index", {
+        shuffle: shuffle, // si se puede participar o no
+        participated: false, // pasamos si participo o no participo
+        shuffleStatus: shuffleStatus, // pasamos el estado del shuffle
+        settings: settings,
+        date: date,
+        disclaimer_date: disclaimer_date,
+      });
+    }
   }
 
   if (req.session.walletId) {
@@ -77,26 +96,49 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  let user = new User({
-    walletId: req.body.walletId,
-    participo: 1,
-    winner: false,
-    createdAt: Date.now(),
-  });
-  const users = await User.find({});
-  req.session.walletId = req.body.walletId;
+  //validamos si el user ya existe
 
-  // Mandamos los participantes a un log por las dudas
+  // let user = await User.findOne({ walletId: req.session.walletId })
+  // console.log("Wallet Id: ",req.session.walletId)
+  // //si no existe el user lo creamos.
+  // let newUser = new User({
+  //   walletId: req.body.walletId,
+  //   participo: 1,
+  //   winner: false,
+  //   createdAt: Date.now(),
+  // });
+  // const users = await User.find({});
+  // req.session.walletId = req.body.walletId;
+  // // Mandamos los participantes a un log por las dudas
+  // try {
+  //   res.send("Cookie have been saved successfully");
+  //   const content = "Wallet Id: " + req.body.walletId + "Created At: " + Date.now() + "\n";
+  //   fs.appendFile("participants.log", content, (err) => {
+  //     if (err) {
+  //       console.error(err);
+  //       return;
+  //     }
+  //   });
+  //   newUser = await newUser.save();
+  // } catch (e) {
+  //   console.log(e);
+  // }
+
+  //si existe el valor lo actualizamos sino lo creamos.
+  const filter = { walletId: req.body.walletId };
+  const options = { upsert: true };
+  const updateDoc = {
+    $set: {
+      walletId: req.body.walletId,
+      participo: true,
+      winner: false,
+      createdAt: Date.now(),
+    },
+  };
   try {
-    res.send("Cookie have been saved successfully");
-    const content = "Wallet Id: " + req.body.walletId + "Created At: " + Date.now() + "\n";
-    fs.appendFile("participants.log", content, (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-    });
-    user = await user.save();
+    req.session.walletId = req.body.walletId;
+    await User.updateOne(filter, updateDoc, options);
+    res.redirect("/");
   } catch (e) {
     console.log(e);
   }
@@ -106,7 +148,7 @@ router.post("/", async (req, res) => {
 router.get("/admin", async (req, res) => {
   let settings = await Settings.findOne();
   let dateString = settings.shuffle_date.split(" ");
-  let date = dateString[0] + "T" + dateString[1] 
+  let date = dateString[0] + "T" + dateString[1];
   if (
     req.session.walletId ==
       "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
@@ -131,6 +173,7 @@ router.post("/admin", async (req, res) => {
   settings.shuffle_status = req.body.shuffle_status;
   settings.show_winners = req.body.show_winners;
   settings.nft_price = req.body.nft_price;
+  settings.reset_db = false;
   try {
     settings = await settings.save();
     res.redirect("/admin");

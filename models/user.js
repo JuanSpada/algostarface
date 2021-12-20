@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     walletId: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
     },
     participo: {
         type: Boolean,

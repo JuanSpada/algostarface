@@ -17,6 +17,10 @@ const settingsSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    reset_db: {
+        type: Boolean,
+        required: true,
+    }
 })
 
 module.exports = mongoose.model('Settings', settingsSchema)

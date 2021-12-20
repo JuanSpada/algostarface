@@ -31,12 +31,14 @@
             <input type="number" class="form-control" name="nft_price" id="nft_price" value=<%= settings.nft_price %>>
             <button type="submit" class="btn btn-primary mt-3">Guardar</button>
         </form>
+        <button class="btn btn-secondary mt-3" id="resetShuffle">Resetear Base de Datos</button>
         <p class="mt-2"><strong>¡CUIDADO!</strong></p>
         <ul>
-            <li>La fecha es en EST</li>
-            <li>Shuffle On: significa si se puede jugar o no al shuffle, en caso de que este apagado va a aparecer en pantalla: Next shuffle will be open for registration on X EST y el contador a la fecha que este asignada aca arriba (osea nadie se va a poder suscribir)</li>
-            <li>Mostrar ganadores: significa que ya marcamos los ganadores en la base de datos entonces les va a aparecer si perdieron o si ganaron. Si está off va a aparecer que el shuffle está cerrado y que los winners van a aparecer pronto. Si el contador no termino no va a pasar nada.</li>
-            <li>Nft Price es el precio de la venta que aparece en el disclaimer</li>
+            <li class="p-1"><strong>Fecha:</strong> es en EST</li>
+            <li class="p-1"><strong>Shuffle On:</strong> significa si se puede jugar o no al shuffle, en caso de que este apagado va a aparecer en pantalla: Next shuffle will be open for registration on X EST y el contador a la fecha que este asignada aca arriba (osea nadie se va a poder suscribir)</li>
+            <li class="p-1"><strong>Mostrar ganadores:</strong> significa que ya marcamos los ganadores en la base de datos entonces les va a aparecer si perdieron o si ganaron. Si está off va a aparecer que el shuffle está cerrado y que los winners van a aparecer pronto. Si el contador no termino no va a pasar nada.</li>
+            <li class="p-1"><strong>Nft Price:</strong> es el precio de la venta que aparece en el disclaimer</li>
+            <li class="p-1"><strong>Resetear Base de Datos:</strong> va a eliminar las wallet de la base y la gente que se haya conectado va a tener que volver a conectarse para participar en el shuffle</li>
         </ul>
     </div>
 </section>
