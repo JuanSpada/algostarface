@@ -12,6 +12,7 @@ const showWinners = true;
 router.get("/", async (req, res) => {
   res.clearCookie("participated2");
   res.clearCookie("participated1");
+  res.clearCookie("participated");
   res.setHeader("Access-Control-Allow-Headers", "*");
 
   console.log(req.cookies);
