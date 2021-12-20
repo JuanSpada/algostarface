@@ -140,15 +140,12 @@ tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
     </div>
 </div>
 </div>
-<h1 id="mostraralgo"><%= date %></h1>
 <script>
   let inputDate = document.querySelector('#shuffle_date')
   // Set the date we're counting down to
-  // let countDownDate = new Date(inputDate.value + " EST").getTime();
   let date = inputDate.value.replaceAll('-', '/') 
   console.log('cpmnvertido,', date)
   let countDownDate = new Date(date + " EST").getTime();
-  document.querySelector('#mostraralgo').innerText = inputDate.value
   // Update the count down every 1 second
   let x = setInterval(function () {
   // Get today's date and time
