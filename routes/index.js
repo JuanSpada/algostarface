@@ -200,4 +200,25 @@ router.get("/reset-shuffle", async (req, res) => {
   }
 });
 
+router.get("/users", async (req, res) => {
+  if (
+    req.session.walletId ==
+      "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
+    req.session.walletId ==
+      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
+  ) {
+    let users = await User.find(
+      { "participo": true },
+   )
+   let totalParticipants = Object.keys(users).length;
+    console.log("USERS: ", users)
+    res.render("users", {
+      users: users,
+      totalParticipants: totalParticipants,
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
 module.exports = router;

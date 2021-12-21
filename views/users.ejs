@@ -1,0 +1,47 @@
+<section class="admin">
+  <img class="logo" src="./logo.png" alt="">
+  <h1 class="text-center mt-3">Admin Shuffle - Algo Starface</h1>
+  <table class="table" id="usersTable">
+    <h4 class="text-center" style="color: #b586fa">Total participants: <strong><%= totalParticipants %></strong></h4>
+    <thead>
+      <tr>
+        <th scope="col">Wallet Id</th>
+        <th scope="col">Twitter Username</th>
+        <th scope="col">Winner</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(user => { %>
+        <tr>
+          <td><%= user.walletId %></td>
+          <td><%= user.twitter_username %></td>
+          <td><%= user.winner %> </td>
+          <td>
+            <select class="form-select" name="" id="">
+              <% if (user.winner) { %>
+                <option value="true" selected>True</option>
+                <option value="false">False</option>
+              <% } else { %>
+                <option value="true">True</option>
+                <option value="false" selected>False</option>
+              <% } %>
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <button class="btn mt-3">Download Participants</button>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+<script>
+let table = $('#userTable').DataTable();
+</script>

@@ -116,6 +116,34 @@ button {
 #disclaimer_btn{
   cursor: pointer;
 }
+.dataTables_info{
+  color: white !important;
+}
+.paginate_button{
+  color: white !important;
+}
+.admin td{
+  color: white;
+}
+.admin th{
+  color: white;
+}
+tr {
+  background-color: inherit !important;
+}
+.dataTables_length select{
+  background-color: #b586fa !important;
+}
+#usersTable_filter label input{
+  border-color: #b586fa;
+  color: white;
+}
+.paginate_button a{
+  color: white !important;
+}
+.admin label{
+  color: white;
+}
 @media only screen and (max-width: 960px) {
   .nav {
     font-size: 1.2em;
