@@ -21,73 +21,38 @@
         </div>
     </div>
 </section>
-<div id="demo">
 
-</div>
-<% if (participated == 4) { %>
-   <section class="participate-section" style="">
-      <button class="btn connect-btn mb-4 button_connect" id="participateBtn" onclick="connectToMyAlgo()">CONNECT</button>
-      <h4 class="message message_inactive m-4" style="display: none;">Registration for our shuffle is now closed. Winners will be announced shortly <br> Connect your wallet to see if you won.</h4>
-      <p class="text-center message_active mt-3 mb-1">Registration is now open. Please connect your wallet to participate in our shuffle.</p>
-      <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
-        View Disclaimer
-      </button>
-  </section>
-<% } %>
-<% if (showWinners) { %>
+<% if (participated == 0) { %>
+  <!-- SI NO PARTICIPASTE -->
+<section class="participate-section" style="">
+  <button class="btn connect-btn mb-4 button_connect" id="participateBtn" onclick="connectToMyAlgo()">CONNECT</button> -->
+  <!-- <h4 class="message message_inactive m-4" style="">Next shuffle will be open for registration on Monday 13 at 4PM EST</h4> -->
+  <h4 class="message message_inactive m-4" style="display: block;">Registration for our shuffle is now closed.<br> Connect your wallet to see if you won.</h4>
+  <!-- <p class="text-center">Next shuffle will be open for registration on Monday 20 at 4PM EST</p> -->
+  <!-- <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
+    View Disclaimer
+  </button> -->
+</section>
+ <% } else { %>
   <% if (participated == 1) { %>
-      <section class="message-section" style="">
-          <h3 class="message">Congratulations! You are now participating in the shuffle with <span class="participantsnum"> <%= amountParticipated %>  </span> total participants. Good Luck!</h3>
-          <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
-            View Disclaimer
-          </button>
-        </section>
-        <section class="shuffle_close_section" style="display: none;">
-          <h3 class="text-center message_shuffle_off">Shuffle is now closed. Winner's will be announced soon!</h3>
-          <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
-            View Disclaimer
-          </button>
-        </section>
-  <% } %>
-  <% } else if (participated == 4) { %>
-    <!-- <section class="participate-section" style="">
-      <button class="btn connect-btn mb-4 button_connect" id="participateBtn" onclick="connectToMyAlgo()">CONNECT</button>
-      <h4 class="message message_inactive m-4" style="display: none;">Registration for our shuffle is now closed. Winners will be announced shortly <br> Connect your wallet to see if you won.</h4>
-      <p class="text-center message_active mt-3 mb-1">Registration is now open. Please connect your wallet to participate in our shuffle.</p>
+<!-- SI GANASTE -->
+    <section class="participate-section" style="">
+      <h2 class="text-center mb-4" style="font-weight: bold;">Congratulations!</h2>
+      <h3 class="message mb-4">You have been selected as a winner of our shuffle! You are now eligible and have the priority to buy an Algo Starface NFT. <br> Please leave us your twitter username so we can contact you!</h3>
+      <section class="form-section">
+        <form class="d-flex justify-content-center flex-column align-items-center" action="#" method="post" id="twForm">
+          <input class="mb-3 p-2" style="width: 200px" type="text" name="tiwtter_user" id="tiwtter_user" placeholder="@TwitterUsername">
+          <input type="hidden" name="walletId" id="walletId" value="<%= walletId %>"> 
+          <button class="form-btn" type="submit">Send</button>
+        </form>
+      </section>
       <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
         View Disclaimer
       </button>
-  </section> -->
-  <% } else { %>
-    <% if (winner) { %>
-      <section class="participate-section" style="">
-        <h2 class="text-center mb-4" style="font-weight: bold;">Congratulations!</h2>
-        <h3 class="message mb-4">You have been selected as a winner of our shuffle! You are now eligible and have the priority to buy an Algo Starface NFT. <br> Please leave us your twitter username so we can contact you!</h3>
-        <section class="form-section">
-          <form class="d-flex justify-content-center flex-column align-items-center" action="#" method="post" id="twForm">
-            <input class="mb-3 p-2" style="width: 200px" type="text" name="tiwtter_user" id="tiwtter_user" placeholder="@TwitterUsername">
-            <input type="hidden" name="walletId" id="walletId" value="<%= walletId %>"> 
-            <button class="form-btn" type="submit">Send</button>
-          </form>
-        </section>
-        <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
-          View Disclaimer
-        </button>
     </section>
-    <% } else { %>
-      <% if (participated == 3) { %>
-        <section class="participate-section" style="">
-          <button class="btn connect-btn mb-4 button_connect" id="participateBtn" onclick="connectToMyAlgo()">CONNECT</button> -->
-          <!-- <h4 class="message message_inactive m-4" style="">Next shuffle will be open for registration on Monday 13 at 4PM EST</h4> -->
-          <!-- <h4 class="message message_inactive m-4" style="display: block;">Registration for our shuffle is now closed.<br> Connect your wallet to see if you won.</h4> -->
-          <!-- <p class="text-center">Next shuffle will be open for registration on Monday 20 at 4PM EST</p> -->
-          <!-- <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
-            View Disclaimer
-          </button> -->
-        </section>
-        <% } else { %>
-          <p class="text-center">Unfortunately you are not one of the lucky ones. Thanks for participating and good luck in the next one!</p>
-    <% } %>
+   <% } else { %>
+    <!-- SI NO GANASTE -->
+    <p class="text-center">Unfortunately you are not one of the lucky ones. Thanks for participating and good luck in the next one!</p>
   <% } %>
 <% } %>
 
