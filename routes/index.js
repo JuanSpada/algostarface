@@ -11,30 +11,16 @@ const hdate = require("human-date");
 
 router.use(cookieParser());
 
-// const shuffle = true; // si se puede jugar al shuffle o no
-// // const shuffleStatus = true; // el estado del shuffle, COMNETADO POR Q LO AGARRAMOS EN BASE A LA FECHA
-// const winners = false; // esto quiere decir el estado de los ganadores, si no los tenemos o los tenemos cuando el shuffle esta closed
-// fijarse si tiene cookies
-
 router.get("/", async (req, res) => {
   res.setHeader("Access-Control-Allow-Headers", "*");
   let settings = await Settings.findOne();
   const shuffle = settings.shuffle_status;
   const winners = settings.show_winners;
   let date = settings.shuffle_date;
-  console.log("esta date: ", date);
   let disclaimer_date = hdate.prettyPrint(date, { showTime: true });
-
-
-
-
   let dbDate = date;
-  console.log("Db Date: ", dbDate)
   dbDate = moment(dbDate).format();
-  console.log("Db Date Formatted: ", dbDate)
   let nowDate = moment().tz("America/New_York").format();
-  console.log("Now Date: ",nowDate)
-
   dbDate = new Date(date + " EST").getTime();
   nowDate = new Date().getTime();
 
@@ -110,35 +96,6 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  //validamos si el user ya existe
-
-  // let user = await User.findOne({ walletId: req.session.walletId })
-  // console.log("Wallet Id: ",req.session.walletId)
-  // //si no existe el user lo creamos.
-  // let newUser = new User({
-  //   walletId: req.body.walletId,
-  //   participo: 1,
-  //   winner: false,
-  //   createdAt: Date.now(),
-  // });
-  // const users = await User.find({});
-  // req.session.walletId = req.body.walletId;
-  // // Mandamos los participantes a un log por las dudas
-  // try {
-  //   res.send("Cookie have been saved successfully");
-  //   const content = "Wallet Id: " + req.body.walletId + "Created At: " + Date.now() + "\n";
-  //   fs.appendFile("participants.log", content, (err) => {
-  //     if (err) {
-  //       console.error(err);
-  //       return;
-  //     }
-  //   });
-  //   newUser = await newUser.save();
-  // } catch (e) {
-  //   console.log(e);
-  // }
-
-  //si existe el valor lo actualizamos sino lo creamos.
   const filter = { walletId: req.body.walletId };
   const options = { upsert: true };
   const updateDoc = {
@@ -179,20 +136,49 @@ router.get("/admin", async (req, res) => {
 });
 
 router.post("/admin", async (req, res) => {
-  let settings = await Settings.findOne();
-  let date = req.body.shuffle_date;
-  date = moment.tz(date, "America/New_York").format("YYYY-MM-DD HH:mm");
-  console.log("NY DATE: ", date);
-  settings.shuffle_date = date;
-  settings.shuffle_status = req.body.shuffle_status;
-  settings.show_winners = req.body.show_winners;
-  settings.nft_price = req.body.nft_price;
-  settings.reset_db = false;
-  try {
-    settings = await settings.save();
-    res.redirect("/admin");
-  } catch (e) {
-    console.log(e);
+  console.log("RES BODYYYYYYYYYY:  ", req.body["db_date"]);
+  if (
+    req.session.walletId ==
+      "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
+    req.session.walletId ==
+      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
+  ) {
+    let settings = await Settings.findOne();
+    let date = req.body["shuffle_date"];
+    date = moment.tz(date, "America/New_York").format("YYYY-MM-DD HH:mm");
+    console.log("NY DATE: ", date);
+    settings.shuffle_date = date;
+    settings.shuffle_status = req.body["shuffle_status"];
+    settings.show_winners = req.body["show_winners"];
+    settings.nft_price = req.body["nft_price"];
+    settings.reset_db = false;
+    try {
+      settings = await settings.save();
+      res.redirect("/admin");
+    } catch (e) {
+      console.log(e);
+    }
+  } else {
+    res.redirect("/");
+  }
+});
+
+router.get("/reset-shuffle", async (req, res) => {
+  if (
+    req.session.walletId ==
+      "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
+    req.session.walletId ==
+      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
+  ) {
+    try {
+      let updateUsers = await User.updateMany({}, { participo: false });
+      console.log("Reset Shuffle Completed: ", updateUsers);
+      res.redirect("/");
+    } catch (e) {
+      print(e);
+    }
+  } else {
+    res.redirect("/");
   }
 });
 

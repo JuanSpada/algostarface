@@ -143,7 +143,6 @@ tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
   let inputDate = document.querySelector('#shuffle_date')
   // Set the date we're counting down to
   let date = inputDate.value.replaceAll('-', '/') 
-  console.log('cpmnvertido,', date)
   let countDownDate = new Date(date + " EST").getTime();
   // Update the count down every 1 second
   let x = setInterval(function () {
