@@ -24,7 +24,21 @@ router.get("/", async (req, res) => {
   let date = settings.shuffle_date;
   console.log("esta date: ", date);
   let disclaimer_date = hdate.prettyPrint(date, { showTime: true });
-  if (date < new Date().getTime()) {
+
+
+
+
+  let dbDate = date;
+  console.log("Db Date: ", dbDate)
+  dbDate = moment(dbDate).format();
+  console.log("Db Date Formatted: ", dbDate)
+  let nowDate = moment().tz("America/New_York").format();
+  console.log("Now Date: ",nowDate)
+
+  dbDate = new Date(date + " EST").getTime();
+  nowDate = new Date().getTime();
+
+  if (dbDate < nowDate) {
     shuffleStatus = false;
   } else {
     shuffleStatus = true;

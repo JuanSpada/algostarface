@@ -8,7 +8,11 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 
 var store = new MongoDBStore(
   {
-    uri: "mongodb+srv://algostarface:Parcero2019@cluster0.stqev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    // server db: 
+    // uri: "mongodb+srv://algostarface:Parcero2019@cluster0.stqev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    // local db:
+    uri: "mongodb://localhost:27017/algostarface?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false",
+    uri: process.env.DB_HOST,
     // databaseName: 'connect_mongodb_session_test',
     collection: "mySessions",
   },
@@ -35,15 +39,6 @@ require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
-// const {check, validationResult} = require('express-validator')
-// app.use(
-//   session({
-//     secret: "1q2w3ee3w2q1",
-//     resave: false,
-//     saveUninitialized: true,
-//     // cookie: { secure: true }, // esto es para https, en local no se activa
-//   })
-// );
 
 const mongoose = require("mongoose");
 // CON ENV FALTA VER EN DIGITAL OCEAN COMO CAMBIARLO CON SSH EN WINDOWS
@@ -57,7 +52,11 @@ const mongoose = require("mongoose");
 
 mongoose
   .connect(
-    "mongodb+srv://algostarface:Parcero2019@cluster0.stqev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    //server db: 
+    // "mongodb+srv://algostarface:Parcero2019@cluster0.stqev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    //local db:
+    // "mongodb://localhost:27017/algostarface?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false",
+    process.env.DB_HOST,
     {
       useUnifiedTopology: true,
       useNewUrlParser: true,
