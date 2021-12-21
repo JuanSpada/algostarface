@@ -12,6 +12,7 @@ const hdate = require("human-date");
 router.use(cookieParser());
 
 router.get("/", async (req, res) => {
+  console.log(req.session)
   res.setHeader("Access-Control-Allow-Headers", "*");
   let settings = await Settings.findOne();
   const shuffle = settings.shuffle_status;
@@ -57,7 +58,7 @@ router.get("/", async (req, res) => {
         shuffle: shuffle, // si se puede participar o no
         participated: true, // pasamos si participo o no participo
         shuffleStatus: shuffleStatus, // pasamos el estado del shuffle
-        walletId: req.cookies.participated2, // le pasamos el wallet id
+        walletId: req.session.walletId, // le pasamos el wallet id
         amountParticipated: countUsers, // pasamos la cantidad de participantes
         settings: settings,
         date: date,
@@ -74,8 +75,9 @@ router.get("/", async (req, res) => {
         winners: winners,
         participated: true, // pasamos si participo o no participo
         shuffleStatus: shuffleStatus, // pasamos el estado del shuffle
-        walletId: req.cookies.participated2, // le pasamos el wallet id
+        walletId: req.session.walletId, // le pasamos el wallet id
         hasWon: user["winner"], // le pasamos si gano o perdió
+        twitter_username: user.twitter_username,
         settings: settings,
         date: date,
         disclaimer_date: disclaimer_date,
@@ -115,6 +117,20 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.post("/send-tw-username", async (req, res) => {
+  console.log(req.body);
+  try {
+    const query = { walletId: req.body["walletId"] };
+    const update = { twitter_username: req.body["tiwtter_user"] };
+    const options = { upsert: true };
+    const updateTwitter = await User.updateOne(query, update, options);
+    console.log(updateTwitter);
+    console.log('session: ', req.session)
+  } catch (e) {
+    print(e);
+  }
+});
+
 //admin
 router.get("/admin", async (req, res) => {
   let settings = await Settings.findOne();
@@ -136,7 +152,6 @@ router.get("/admin", async (req, res) => {
 });
 
 router.post("/admin", async (req, res) => {
-  console.log("RES BODYYYYYYYYYY:  ", req.body["db_date"]);
   if (
     req.session.walletId ==
       "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
@@ -171,7 +186,10 @@ router.get("/reset-shuffle", async (req, res) => {
       "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
   ) {
     try {
-      let updateUsers = await User.updateMany({}, { participo: false });
+      let updateUsers = await User.updateMany(
+        {},
+        { participo: false, winner: false }
+      );
       console.log("Reset Shuffle Completed: ", updateUsers);
       res.redirect("/");
     } catch (e) {

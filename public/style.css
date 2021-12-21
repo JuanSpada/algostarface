@@ -105,6 +105,17 @@ body {
   margin: 0 auto;
   margin-bottom: 7px !important;
 }
+#success_message {
+  color: #b586fa;
+  text-align: center;
+}
+button {
+  background-color: #b586fa !important;
+  color: white !important;
+}
+#disclaimer_btn{
+  cursor: pointer;
+}
 @media only screen and (max-width: 960px) {
   .nav {
     font-size: 1.2em;

@@ -12,6 +12,9 @@ const userSchema = new mongoose.Schema({
     winner: {
         type: Boolean,
     },
+    twitter_username:{
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now

@@ -33,10 +33,10 @@
         <h3 class="message">Congratulations! You are now participating in the shuffle with <span class="participantsnum">
             <%= amountParticipated %>
           </span> total participants. Good Luck!</h3>
-        <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0"
+        <a class="text-center" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0"
           data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
           View Disclaimer
-        </button>
+        </a>
       </section>
     <% } else{ %>
       <!-- PARTICIPO Y SHUFFLE OFF -->
@@ -52,16 +52,16 @@
             <section class="form-section">
               <form class="d-flex justify-content-center flex-column align-items-center" action="#" method="post"
                 id="twForm">
-                <input class="mb-3 p-2" style="width: 200px" type="text" name="tiwtter_user" id="tiwtter_user"
-                  placeholder="@TwitterUsername">
+                <input required class="mb-3 p-2" style="width: 200px" type="text" name="tiwtter_user" id="tiwtter_user"
+                  placeholder="@TwitterUsername" value="<%= twitter_username %> ">
                 <input type="hidden" name="walletId" id="walletId" value="<%= walletId %>">
                 <button class="form-btn" type="submit">Send</button>
               </form>
             </section>
-            <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0"
+          <a class="text-center" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0"
               data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
               View Disclaimer
-            </button>
+          </a>
           </section>
         <% } else{ %>
           <!-- PARTICIPO, SHUFFLE OFF, YA ESTÁN LOS GANADORES Y NO ES GANADOR -->
@@ -71,10 +71,10 @@
         <!-- PARTICIPO, SHUFFLE OFF Y NO ESTÁN LOS GANADORES -->
         <section class="shuffle_close_section">
           <h3 class="text-center message_shuffle_off">Shuffle is now closed. Winner's will be announced soon!</h3>
-          <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0"
+          <a class="text-center" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0"
             data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
             View Disclaimer
-          </button>
+          </a>
         </section>
       <% } %>
   
@@ -88,10 +88,10 @@
           onclick="connectToMyAlgo()">CONNECT</button>
         <p class="text-center message_active mt-3 mb-1">Registration is now open. Please connect your wallet to
           participate in our shuffle.</p>
-        <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0"
+        <a class="text-center" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0"
           data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
           View Disclaimer
-        </button>
+        </a>
       </section>
     <% } else{ %>
       <!-- NO PARTICIPO Y SHUFFLE OFF -->
@@ -99,10 +99,10 @@
         <button class="btn connect-btn mb-4 button_connect" id="participateBtn"
           onclick="connectToMyAlgo()">CONNECT</button>
         <h4 class="message m-4">Registration for our shuffle is now closed. <br> Connect your wallet to see if you won.</h4>
-        <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0"
+        <a class="text-center" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0"
           data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
           View Disclaimer
-        </button>
+        </a>
       </section>
     <% } %>
   <% } %>

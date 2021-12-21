@@ -4,10 +4,10 @@
     <div class="d-flex justify-content-center flex-column pt-3 col-lg-6 m-auto">
         <form method="post" id="updateShuffle">
             <label for="shuffle_date">Fecha y Hora EST:</label>
-            <input type="text" hidden id="db_date" name="db_date" value=<%=shuffle_date %> >
-            <input class="form-control" type="datetime-local" name="shuffle_date" id="shuffle_date"
+            <input required type="text" hidden id="db_date" name="db_date" value=<%=shuffle_date %> >
+            <input required class="form-control" type="datetime-local" name="shuffle_date" id="shuffle_date"
                 value=<%=shuffle_date %>>
-            <!-- <input class="form-control" type="time" name="shuffle_time" id="shuffle_time"> -->
+            <!-- <input required class="form-control" type="time" name="shuffle_time" id="shuffle_time"> -->
             <label class="mt-3" for="shuffle_status">Seleccionar si se puede jugar al shuffle o no:</label>
             <select class="form-control" name="shuffle_status" id="shuffle_status">
                 <% if (settings.shuffle_status) { %>
@@ -29,7 +29,7 @@
                         <% } %>
             </select>
             <label for="nft_price" class="mt-3">Precio del NFT:</label>
-            <input type="number" class="form-control" name="nft_price" id="nft_price" value=<%=settings.nft_price %>>
+            <input required type="number" class="form-control" name="nft_price" id="nft_price" value=<%=settings.nft_price %>>
             <button type="submit" class="btn btn-primary mt-3">Guardar</button>
         </form>
         <button class="btn btn-secondary mt-3" id="resetShuffle">Resetear Base de Datos</button>
@@ -48,7 +48,6 @@
         </ul>
     </div>
 </section>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     //agregamos la fecha del shuffle que estaba en el input
     let dbDate = document.querySelector('#db_date')
@@ -65,7 +64,7 @@
     updateShuffleForm.addEventListener('submit', e => {
         e.preventDefault()
         let formData = new FormData(updateShuffleForm)
-        var data = {};
+        let data = {};
         formData.forEach(function (value, key) {
             data[key] = value;
         });
