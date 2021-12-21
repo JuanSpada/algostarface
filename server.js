@@ -11,7 +11,7 @@ var store = new MongoDBStore(
     // server db: 
     // uri: "mongodb+srv://algostarface:Parcero2019@cluster0.stqev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     // local db:
-    uri: "mongodb://localhost:27017/algostarface?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false",
+    // uri: "mongodb://localhost:27017/algostarface?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false",
     uri: process.env.DB_HOST,
     // databaseName: 'connect_mongodb_session_test',
     collection: "mySessions",
@@ -21,7 +21,6 @@ var store = new MongoDBStore(
     // Should have gotten an error
   }
 );
-
 app.use(
   session({
     secret: "1q2w3ee3w2q1",
