@@ -12,18 +12,12 @@
     </thead>
     <tbody>
       <% for( let index = 0; index < users.length; index++ ) { %>
-        <!-- INPUT DEL WALLET HIDDEN -->
-        <!-- <input type="text" hidden name="walletId[<%= index %>]" value="<%= users[index] %>"> -->
         <tr>
           <td><%= users[index].walletId %></td>
           <td><%= users[index].twitter_username %></td>
           <td>
+            <p style="display: none;"><%= users[index].winner %> </p>
             <select class="form-select" name="winnerStatus[<%= index %>]">
-              <!-- <form id="editUsersForm">
-    
-                <button class="btn btn-lg" type="submit">Save</button>
-                <p class="mt-2">Al hacer click en SAVE se van a guardar todos los campos del <strong>Winner Status</strong></p>
-              </form> -->
               <% if (users[index].winner) { %>
                 <option value="<%= users[index].walletId %>:true" selected>True</option>
                 <option value="<%= users[index].walletId %>:false">False</option>
@@ -53,13 +47,6 @@ let table = $('#usersTable').DataTable();
 let url = window.location.href
 url = url.split('/users')
 const editUsersBtn = document.querySelector('#editUsersBtn')
-// let formData = new FormData(editUsersForm)
-// let data = {};
-// formData.forEach(function (value, key) {
-//     data[key] = value;
-// });
-// console.log(data)
-
 const updateUsers = () => {
   Swal.fire({
     title: 'Are you sure?',
