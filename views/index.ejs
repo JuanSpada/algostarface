@@ -22,62 +22,8 @@
     </div>
 </section>
 
-<% if (participated == 0) { %>
-  <!-- SI NO PARTICIPASTE -->
-<section class="participate-section" style="">
-  <button class="btn connect-btn mb-4 button_connect" id="participateBtn" onclick="connectToMyAlgo()">CONNECT</button>
-  <!-- <h4 class="message message_inactive m-4" style="">Next shuffle will be open for registration on Monday 13 at 4PM EST</h4> -->
-  <h4 class="message message_inactive m-4" style="display: block;">Registration for our shuffle is now closed.<br> Connect your wallet to see if you won.</h4>
-  <!-- <p class="text-center">Next shuffle will be open for registration on Monday 20 at 4PM EST</p> -->
-  <!-- <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
-    View Disclaimer
-  </button> -->
-</section>
- <% } else { %>
-  <% if (participated == 1) { %>
-<!-- SI GANASTE -->
-    <section class="participate-section" style="">
-      <h2 class="text-center mb-4" style="font-weight: bold;">Congratulations!</h2>
-      <h3 class="message mb-4">You have been selected as a winner of our shuffle! You are now eligible and have the priority to buy an Algo Starface NFT. <br> Please leave us your twitter username so we can contact you!</h3>
-      <section class="form-section">
-        <form class="d-flex justify-content-center flex-column align-items-center" action="#" method="post" id="twForm">
-          <input class="mb-3 p-2" style="width: 200px" type="text" name="tiwtter_user" id="tiwtter_user" placeholder="@TwitterUsername">
-          <input type="hidden" name="walletId" id="walletId" value="<%= walletId %>"> 
-          <button class="form-btn" type="submit">Send</button>
-        </form>
-      </section>
-      <button type="button" id="disclaimer_btn" style="color: #B586FA; background-color: inherit; border: 0" data-bs-toggle="modal" data-bs-target="#disclaimer" class="mt-2">
-        View Disclaimer
-      </button>
-    </section>
-   <% } else { %>
-    <!-- SI NO GANASTE -->
-    <p class="text-center">Unfortunately you are not one of the lucky ones. Thanks for participating and good luck in the next one!</p>
-  <% } %>
-<% } %>
+<p class="text-center">Next shuffle will be open for registration on Monday 12/27 4PM EST</p>
 
-<!-- Modal -->
-<div class="modal fade disclaimerModal" id="disclaimer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="border: 0; padding-bottom: 0;">
-        <button type="button" style="color: white; background-color: #B586FA;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <h1 class="text-center" style="font-weight: bold">DISCLAIMER</h1>
-        <p>Shuffle entry is now open. You have until December 21, 4PM EST to submit your wallet code.</p>
-        <p>It is free to enter the shuffle and 10 random winners will be selected. The winners will be announced shortly after registration closes.</p>
-        <p>If you submit the same wallet code more than once it will only count as one entry.</p>
-        <p>After the raffle each winner will be entitled to purchase a random Algo Starface NFT at 60A.</p>
-        <p>Winners have 24hs to claim their Algo Starface NFT. If you are selected as a winner, you must fill out the form so that we can contact you.Thank you!</p>
-        <p>Good luck to you all!</p>
-      </div>
-      <div class="modal-footer" style="border: inherit; padding-top: 0;">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color:#B586FA">Understood</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
   if(getCookie('twitterSend')){
