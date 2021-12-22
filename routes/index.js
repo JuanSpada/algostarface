@@ -8,6 +8,7 @@ const fs = require("fs");
 const { now } = require("mongoose");
 const moment = require("moment-timezone");
 const hdate = require("human-date");
+const exportUsersToExcel = require("../src/exportService")
 
 router.use(cookieParser());
 
@@ -219,25 +220,47 @@ router.get("/users", async (req, res) => {
 });
 
 router.put("/users", async (req, res) => {
-  const data = req.body;
-  for (let index = 0; index < data.length; index++) {
-    const element = data[index];
-    console.log(element["winnerStatus"])
-    const filter = { walletId: element["walletId"] };
-    const options = { upsert: false };
-    const updateDoc = {
-      $set: {
-        winner: element["winnerStatus"],
-      },
-    };
-    try {
-      req.session.walletId = req.body.walletId;
-      res = await User.updateOne(filter, updateDoc, options);
-      console.log(res)
-    } catch (e) {
-      console.log(e);
+  if (
+    req.session.walletId ==
+      "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
+    req.session.walletId ==
+      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
+  ) {
+    const data = req.body;
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      console.log(element["winnerStatus"]);
+      const filter = { walletId: element["walletId"] };
+      const options = { upsert: false };
+      const updateDoc = {
+        $set: {
+          winner: element["winnerStatus"],
+        },
+      };
+      try {
+        req.session.walletId = req.body.walletId;
+        res = await User.updateOne(filter, updateDoc, options);
+        console.log(res);
+      } catch (e) {
+        console.log(e);
+      }
     }
+  } else {
+    res.redirect("/");
   }
+});
+
+router.post("/download-users", async (req, res) => {
+  let users = await User.find({ participo: true });
+  const workSheetColumnName = [
+    "walletId", 
+    "winner",
+    "createdAt"
+  ]
+  const workSheetName = "Users";
+  const filePath = "./routes/users.xlsx";
+  exportUsersToExcel(users, workSheetColumnName, workSheetName, filePath)
+  res.sendFile(__dirname + "/users.xlsx")
 });
 
 module.exports = router;
