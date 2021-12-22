@@ -12,7 +12,7 @@ const hdate = require("human-date");
 router.use(cookieParser());
 
 router.get("/", async (req, res) => {
-  console.log(req.session)
+  console.log(req.session);
   res.setHeader("Access-Control-Allow-Headers", "*");
   let settings = await Settings.findOne();
   const shuffle = settings.shuffle_status;
@@ -125,7 +125,7 @@ router.post("/send-tw-username", async (req, res) => {
     const options = { upsert: true };
     const updateTwitter = await User.updateOne(query, update, options);
     console.log(updateTwitter);
-    console.log('session: ', req.session)
+    console.log("session: ", req.session);
   } catch (e) {
     print(e);
   }
@@ -207,17 +207,36 @@ router.get("/users", async (req, res) => {
     req.session.walletId ==
       "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
   ) {
-    let users = await User.find(
-      { "participo": true },
-   )
-   let totalParticipants = Object.keys(users).length;
-    console.log("USERS: ", users)
+    let users = await User.find({ participo: true });
+    let totalParticipants = Object.keys(users).length;
     res.render("users", {
       users: users,
       totalParticipants: totalParticipants,
     });
   } else {
     res.redirect("/");
+  }
+});
+
+router.put("/users", async (req, res) => {
+  const data = req.body;
+  for (let index = 0; index < data.length; index++) {
+    const element = data[index];
+    console.log(element["winnerStatus"])
+    const filter = { walletId: element["walletId"] };
+    const options = { upsert: false };
+    const updateDoc = {
+      $set: {
+        winner: element["winnerStatus"],
+      },
+    };
+    try {
+      req.session.walletId = req.body.walletId;
+      res = await User.updateOne(filter, updateDoc, options);
+      console.log(res)
+    } catch (e) {
+      console.log(e);
+    }
   }
 });
 

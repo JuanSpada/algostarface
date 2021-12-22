@@ -1,47 +1,111 @@
 <section class="admin">
   <img class="logo" src="./logo.png" alt="">
-  <h1 class="text-center mt-3">Admin Shuffle - Algo Starface</h1>
+  <h1 class="text-center mt-3">Participants:</h1>
   <table class="table" id="usersTable">
-    <h4 class="text-center" style="color: #b586fa">Total participants: <strong><%= totalParticipants %></strong></h4>
+    <p class="text-center" style="color: #b586fa">Total Participants: <strong><%= totalParticipants %></strong></p>
     <thead>
       <tr>
         <th scope="col">Wallet Id</th>
         <th scope="col">Twitter Username</th>
-        <th scope="col">Winner</th>
-        <th scope="col">Edit</th>
+        <th scope="col">Winner Status</th>
       </tr>
     </thead>
     <tbody>
-      <% users.forEach(user => { %>
+      <% for( let index = 0; index < users.length; index++ ) { %>
+        <!-- INPUT DEL WALLET HIDDEN -->
+        <!-- <input type="text" hidden name="walletId[<%= index %>]" value="<%= users[index] %>"> -->
         <tr>
-          <td><%= user.walletId %></td>
-          <td><%= user.twitter_username %></td>
-          <td><%= user.winner %> </td>
+          <td><%= users[index].walletId %></td>
+          <td><%= users[index].twitter_username %></td>
           <td>
-            <select class="form-select" name="" id="">
-              <% if (user.winner) { %>
-                <option value="true" selected>True</option>
-                <option value="false">False</option>
+            <select class="form-select" name="winnerStatus[<%= index %>]">
+              <!-- <form id="editUsersForm">
+    
+                <button class="btn btn-lg" type="submit">Save</button>
+                <p class="mt-2">Al hacer click en SAVE se van a guardar todos los campos del <strong>Winner Status</strong></p>
+              </form> -->
+              <% if (users[index].winner) { %>
+                <option value="<%= users[index].walletId %>:true" selected>True</option>
+                <option value="<%= users[index].walletId %>:false">False</option>
               <% } else { %>
-                <option value="true">True</option>
-                <option value="false" selected>False</option>
+                <option value="<%= users[index].walletId %>:true">True</option>
+                <option value="<%= users[index].walletId %>:false" selected>False</option>
               <% } %>
-              <option value="true">True</option>
-              <option value="false">False</option>
             </select>
           </td>
         </tr>
-      <% }) %>
+      <% } %>
     </tbody>
   </table>
-  <button class="btn mt-3">Download Participants</button>
+  <button class="btn btn-lg" id="editUsersBtn">Save</button>
+  <hr>
+  <p><strong>Other Configurations: (Doing)</strong></p>
+  <button class="btn">Get Winners</button>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-  
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
 <script>
-let table = $('#userTable').DataTable();
+let table = $('#usersTable').DataTable();
+//sacamos la url para los fetchs
+let url = window.location.href
+url = url.split('/users')
+const editUsersBtn = document.querySelector('#editUsersBtn')
+// let formData = new FormData(editUsersForm)
+// let data = {};
+// formData.forEach(function (value, key) {
+//     data[key] = value;
+// });
+// console.log(data)
+
+const updateUsers = () => {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, update the shuffle!'
+}).then((result) => {
+    if (result.isConfirmed) {
+      data = []
+      const selects = document.querySelectorAll('.form-select');
+      selects.forEach(select => {
+        var i = select.options.selectedIndex;
+        const user = select.options[i].value 
+        let usersValue = user.split(":")
+        usersValue = {
+          "walletId": usersValue[0],
+          "winnerStatus": usersValue[1]
+        }
+        console.log(usersValue)
+        data.push(usersValue)
+      });
+      fetch(url[0] + '/users', {
+          method: 'PUT', // or 'PUT'
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+      })
+          .then(data => {
+              console.log('Success:', data);
+          })
+          .then(
+              Swal.fire(
+                  'Success!',
+                  'The shuffle has been u successfully.',
+                  'success'
+              )
+          )
+          .catch((error) => {
+              console.error('Error:', error);
+          });
+    }
+})
+};
+editUsersBtn.addEventListener('click', updateUsers)
 </script>
