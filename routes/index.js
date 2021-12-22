@@ -55,12 +55,14 @@ router.get("/", async (req, res) => {
     if (shuffleStatus) {
       ///// esta abierto el shuffle
       const countUsers = await User.countDocuments();
+      let users = await User.find({ participo: true });
+      let totalParticipants = Object.keys(users).length;
       res.render("index", {
         shuffle: shuffle, // si se puede participar o no
         participated: true, // pasamos si participo o no participo
         shuffleStatus: shuffleStatus, // pasamos el estado del shuffle
         walletId: req.session.walletId, // le pasamos el wallet id
-        amountParticipated: countUsers, // pasamos la cantidad de participantes
+        amountParticipated: totalParticipants, // pasamos la cantidad de participantes
         settings: settings,
         date: date,
         disclaimer_date: disclaimer_date,

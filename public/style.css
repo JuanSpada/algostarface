@@ -144,6 +144,10 @@ tr {
 .admin label{
   color: white;
 }
+.paginate_button {
+  color: white !important;
+  background-color: #b586fa !important;
+}
 @media only screen and (max-width: 960px) {
   .nav {
     font-size: 1.2em;
