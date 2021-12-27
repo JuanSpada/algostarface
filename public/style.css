@@ -105,6 +105,49 @@ body {
   margin: 0 auto;
   margin-bottom: 7px !important;
 }
+#success_message {
+  color: #b586fa;
+  text-align: center;
+}
+button {
+  background-color: #b586fa !important;
+  color: white !important;
+}
+#disclaimer_btn{
+  cursor: pointer;
+}
+.dataTables_info{
+  color: white !important;
+}
+.paginate_button{
+  color: white !important;
+}
+.admin td{
+  color: white;
+}
+.admin th{
+  color: white;
+}
+tr {
+  background-color: inherit !important;
+}
+.dataTables_length select{
+  background-color: #b586fa !important;
+}
+#usersTable_filter label input{
+  border-color: #b586fa;
+  color: white;
+}
+.paginate_button a{
+  color: white !important;
+}
+.admin label{
+  color: white;
+}
+.paginate_button {
+  color: white !important;
+  background-color: #b586fa !important;
+}
 @media only screen and (max-width: 960px) {
   .nav {
     font-size: 1.2em;
