@@ -13,13 +13,7 @@ const exportUsersToExcel = require("../src/exportService")
 router.use(cookieParser());
 
 router.get("/", async (req, res) => {
-<<<<<<< HEAD
-  res.clearCookie("participated2");
-  res.clearCookie("participated1");
-  res.clearCookie("participated");
-=======
   console.log(req.session);
->>>>>>> dev
   res.setHeader("Access-Control-Allow-Headers", "*");
   let settings = await Settings.findOne();
   const shuffle = settings.shuffle_status;
@@ -38,43 +32,6 @@ router.get("/", async (req, res) => {
     shuffleStatus = true;
   }
 
-<<<<<<< HEAD
-  const query = { walletId: req.cookies.participated3 };
-  const user = await User.findOne(query);
-
-  console.log(user);
-  //si participaste
-  console.log(req.cookies)
-  if ("participated3" in req.cookies) {
-    // console.log("participo");
-    // res.render("index", {
-    //   participated: 1,
-    //   amountParticipated: countUsers,
-    //   winner: true,
-    //   showWinners,
-    //   walletId: req.cookies.participated3,
-    // });
-    if (user) {
-      if ("participated3" in req.cookies && user["winner"]) {
-        console.log("participo y es winner");
-        res.render("index", {
-          participated: 1,
-          amountParticipated: countUsers,
-          winner: true,
-          showWinners,
-          walletId: req.cookies.participated3,
-        });
-      } else {
-        console.log("participo y no es winner");
-        res.render("index", {
-          participated: 3,
-          amountParticipated: countUsers,
-          winner: false,
-          showWinners,
-          walletId: req.cookies.participated3,
-        });
-      }
-=======
   //SI NO PARTICIPO RESETEAMOS COOKIES PARA Q VUELVA A PARTICIPAR, ESTO ES PARA RESETEAR LOS SHUFFLE
   let user = await User.findOne({ walletId: req.session.walletId });
 
@@ -128,26 +85,17 @@ router.get("/", async (req, res) => {
         date: date,
         disclaimer_date: disclaimer_date,
       });
->>>>>>> dev
     }
   } else {
     // SI NO PARTICIPO
     /// si no tiene cookies mandar para que se logee
     res.render("index", {
-<<<<<<< HEAD
-      participated: 0,
-      amountParticipated: countUsers,
-      winner: false,
-      showWinners,
-      walletId: req.cookies.participated3,
-=======
       shuffle: shuffle, // si se puede participar o no
       participated: false, // pasamos si participo o no participo
       shuffleStatus: shuffleStatus, // pasamos el estado del shuffle
       settings: settings,
       date: date,
       disclaimer_date: disclaimer_date,
->>>>>>> dev
     });
   }
 });
@@ -164,26 +112,9 @@ router.post("/", async (req, res) => {
     },
   };
   try {
-<<<<<<< HEAD
-    // res.cookie('participated', req.body.walletId, { maxAge: 60*60*24*7  }); //3 min, esta en miliseconds
-    res.cookie("participated3", req.body.walletId, {
-      expire: new Date() + 9999,
-    });
-    res.send("Cookie have been saved successfully");
-    const content = req.body.walletId + "\n";
-    fs.appendFile("participants.log", content, (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      //done!
-    });
-    user = await user.save();
-=======
     req.session.walletId = req.body.walletId;
     await User.updateOne(filter, updateDoc, options);
     res.redirect("/");
->>>>>>> dev
   } catch (e) {
     console.log(e);
   }
