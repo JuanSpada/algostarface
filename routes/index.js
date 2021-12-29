@@ -107,7 +107,7 @@ router.post("/", async (req, res) => {
     $set: {
       walletId: req.body.walletId,
       participo: true,
-      winner: false,
+      // winner: false,
       createdAt: Date.now(),
     },
   };
