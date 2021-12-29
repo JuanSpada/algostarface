@@ -8,12 +8,11 @@ const fs = require("fs");
 const { now } = require("mongoose");
 const moment = require("moment-timezone");
 const hdate = require("human-date");
-const exportUsersToExcel = require("../src/exportService")
+const exportUsersToExcel = require("../src/exportService");
 
 router.use(cookieParser());
 
 router.get("/", async (req, res) => {
-  console.log(req.session);
   res.setHeader("Access-Control-Allow-Headers", "*");
   let settings = await Settings.findOne();
   const shuffle = settings.shuffle_status;
@@ -38,7 +37,6 @@ router.get("/", async (req, res) => {
   if (user) {
     if (!user.participo) {
       // si el user no participo le renderizamos para que participe de nuevo
-      console.log(user);
       res.clearCookie("connect.sid");
       res.render("index", {
         shuffle: shuffle, // si se puede participar o no
@@ -72,7 +70,6 @@ router.get("/", async (req, res) => {
       // por ende hay que traer el usuario para ver si gano o perdió
       const query = { walletId: req.session.walletId };
       const user = await User.findOne(query);
-      console.log("Is winner: ", user["winner"]);
       res.render("index", {
         shuffle: shuffle, // si se puede participar o no
         winners: winners,
@@ -116,19 +113,16 @@ router.post("/", async (req, res) => {
     await User.updateOne(filter, updateDoc, options);
     res.redirect("/");
   } catch (e) {
-    console.log(e);
+    throw e;
   }
 });
 
 router.post("/send-tw-username", async (req, res) => {
-  console.log(req.body);
   try {
     const query = { walletId: req.body["walletId"] };
     const update = { twitter_username: req.body["tiwtter_user"] };
     const options = { upsert: true };
     const updateTwitter = await User.updateOne(query, update, options);
-    console.log(updateTwitter);
-    console.log("session: ", req.session);
   } catch (e) {
     print(e);
   }
@@ -164,7 +158,6 @@ router.post("/admin", async (req, res) => {
     let settings = await Settings.findOne();
     let date = req.body["shuffle_date"];
     date = moment.tz(date, "America/New_York").format("YYYY-MM-DD HH:mm");
-    console.log("NY DATE: ", date);
     settings.shuffle_date = date;
     settings.shuffle_status = req.body["shuffle_status"];
     settings.show_winners = req.body["show_winners"];
@@ -174,7 +167,7 @@ router.post("/admin", async (req, res) => {
       settings = await settings.save();
       res.redirect("/admin");
     } catch (e) {
-      console.log(e);
+      throw e;
     }
   } else {
     res.redirect("/");
@@ -193,7 +186,6 @@ router.get("/reset-shuffle", async (req, res) => {
         {},
         { participo: false, winner: false }
       );
-      console.log("Reset Shuffle Completed: ", updateUsers);
       res.redirect("/");
     } catch (e) {
       print(e);
@@ -231,7 +223,6 @@ router.put("/users", async (req, res) => {
     const data = req.body;
     for (let index = 0; index < data.length; index++) {
       const element = data[index];
-      console.log(element["winnerStatus"]);
       const filter = { walletId: element["walletId"] };
       const options = { upsert: false };
       const updateDoc = {
@@ -242,9 +233,8 @@ router.put("/users", async (req, res) => {
       try {
         req.session.walletId = req.body.walletId;
         res = await User.updateOne(filter, updateDoc, options);
-        console.log(res);
       } catch (e) {
-        console.log(e);
+        throw e;
       }
     }
   } else {
@@ -254,15 +244,11 @@ router.put("/users", async (req, res) => {
 
 router.post("/download-users", async (req, res) => {
   let users = await User.find({ participo: true });
-  const workSheetColumnName = [
-    "walletId", 
-    "winner",
-    "createdAt"
-  ]
+  const workSheetColumnName = ["walletId", "winner", "createdAt"];
   const workSheetName = "Users";
   const filePath = "./routes/users.xlsx";
-  exportUsersToExcel(users, workSheetColumnName, workSheetName, filePath)
-  res.sendFile(__dirname + "/users.xlsx")
+  exportUsersToExcel(users, workSheetColumnName, workSheetName, filePath);
+  res.sendFile(__dirname + "/users.xlsx");
 });
 
 module.exports = router;
