@@ -137,7 +137,9 @@ router.get("/admin", async (req, res) => {
     req.session.walletId ==
       "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
     req.session.walletId ==
-      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
+      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY" ||
+      req.session.walletId == 
+      "4L5WJB46CST6JB26U4MEQZ5PIG2QO6EM6X5OZCSWFUHBDIMENMAIWULURQ"
   ) {
     res.render("admin", {
       settings: settings,
@@ -153,7 +155,9 @@ router.post("/admin", async (req, res) => {
     req.session.walletId ==
       "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
     req.session.walletId ==
-      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
+      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY" ||
+      req.session.walletId == 
+      "4L5WJB46CST6JB26U4MEQZ5PIG2QO6EM6X5OZCSWFUHBDIMENMAIWULURQ"
   ) {
     let settings = await Settings.findOne();
     let date = req.body["shuffle_date"];
@@ -179,7 +183,9 @@ router.get("/reset-shuffle", async (req, res) => {
     req.session.walletId ==
       "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
     req.session.walletId ==
-      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
+      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY" ||
+      req.session.walletId == 
+      "4L5WJB46CST6JB26U4MEQZ5PIG2QO6EM6X5OZCSWFUHBDIMENMAIWULURQ"
   ) {
     try {
       let updateUsers = await User.updateMany(
@@ -200,7 +206,9 @@ router.get("/users", async (req, res) => {
     req.session.walletId ==
       "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
     req.session.walletId ==
-      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
+      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY" ||
+      req.session.walletId == 
+      "4L5WJB46CST6JB26U4MEQZ5PIG2QO6EM6X5OZCSWFUHBDIMENMAIWULURQ"
   ) {
     let users = await User.find({ participo: true });
     let totalParticipants = Object.keys(users).length;
@@ -218,7 +226,9 @@ router.put("/users", async (req, res) => {
     req.session.walletId ==
       "4VKJQQ3VDJ6FNTC7FDYTQWW536G7M2O53P4P6ZHUVFZ35SCOB6CSUHST74" ||
     req.session.walletId ==
-      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY"
+      "N3RUU3R5MS5Q3NDDVF4Z4DF4JOFVKX5MSG6QATUVCMNVY3I5GT6VTEFRCY" ||
+    req.session.walletId == 
+      "4L5WJB46CST6JB26U4MEQZ5PIG2QO6EM6X5OZCSWFUHBDIMENMAIWULURQ"
   ) {
     const data = req.body;
     for (let index = 0; index < data.length; index++) {
