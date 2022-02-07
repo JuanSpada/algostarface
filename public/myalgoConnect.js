@@ -49,7 +49,7 @@ async function connectToMyAlgoAdmAuth() {
     })
     .then(response => response)
     .then(data => {
-      window.location.href = "https://shuffle.algostarface.com/admin"
+      window.location.href = window.location.origin+"/admin";
       console.log('Success:', data);
     })
     .catch((error) => {
