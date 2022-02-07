@@ -251,4 +251,33 @@ router.post("/download-users", async (req, res) => {
   res.sendFile(__dirname + "/users.xlsx");
 });
 
+
+//auth admin
+
+router.get("/auth-admin", async (req, res) => {
+  res.render("auth-admin");
+});
+
+router.post("/auth-admin", async (req, res) => {
+  console.log("Session antes: ", req.session.walletId)
+  const filter = { walletId: req.body.walletId };
+  const options = { upsert: true };
+  const updateDoc = {
+    $set: {
+      walletId: req.body.walletId,
+      participo: false,
+      // winner: false,
+      createdAt: Date.now(),
+    },
+  };
+  try {
+    req.session.walletId = req.body.walletId;
+    await User.updateOne(filter, updateDoc, options);
+    res.redirect("/forro");
+  } catch (e) {
+    throw e;
+  }
+  console.log("Session después: ", req.session.walletId)
+});
+
 module.exports = router;

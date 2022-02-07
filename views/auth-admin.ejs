@@ -1,0 +1,17 @@
+<section class="admin">
+    <img class="logo" src="./logo2.png" alt="">
+    <section class="participate-section" style="">
+        <button class="btn connect-btn mt-4 button_connect" id="participateBtn"
+            onclick="connectToMyAlgoAdmAuth()">CONNECT</button>
+    </section>
+</section>
+
+<script>
+    let promptPsw = prompt('Password: ');
+    if (promptPsw == "Parcero2019") {
+        alert("Autorizado");
+    } else {
+        alert("Desautorizado")
+        window.location.href = "https://shuffle.algostarface.com/"
+    }
+</script>
